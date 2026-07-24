@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
@@ -6,10 +7,42 @@ import Footer from '@/components/Footer';
 
 export default function LoginPage() {
   const router = useRouter();
+  const [form, setForm] = useState({ email: '', password: '' });
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    router.push('/account');
+    setError('');
+    setLoading(true);
+
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+
+      if (!data.success) {
+        setError(data.error || 'Đăng nhập thất bại.');
+        return;
+      }
+
+      // Redirect theo role
+      if (data.user.role === 'admin') {
+        router.push('/admin/dashboard');
+      } else {
+        router.push('/account');
+      }
+      router.refresh();
+    } catch {
+      setError('Có lỗi xảy ra, vui lòng thử lại.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -23,19 +56,40 @@ export default function LoginPage() {
                 <h1>Chào mừng trở lại</h1>
                 <p className="sub">Đăng nhập để theo dõi đơn hàng và ưu đãi dành riêng cho bạn.</p>
                 <form onSubmit={handleLogin}>
+                  {error && (
+                    <div className="form-error" role="alert" style={{ color: 'var(--red, #c0392b)', marginBottom: '12px', fontSize: '13.5px' }}>
+                      {error}
+                    </div>
+                  )}
                   <div className="field">
-                    <label>Địa chỉ Email</label>
-                    <input type="email" required placeholder="bạn@email.com" />
+                    <label htmlFor="email">Địa chỉ Email</label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      placeholder="bạn@email.com"
+                      value={form.email}
+                      onChange={handleChange}
+                      autoComplete="email"
+                    />
                   </div>
                   <div className="field">
-                    <label>Mật khẩu</label>
-                    <input type="password" required placeholder="••••••••" />
+                    <label htmlFor="password">Mật khẩu</label>
+                    <input
+                      id="password"
+                      name="password"
+                      type="password"
+                      required
+                      placeholder="••••••••"
+                      value={form.password}
+                      onChange={handleChange}
+                      autoComplete="current-password"
+                    />
                   </div>
-                  <div className="checkbox-row">
-                    <input type="checkbox" id="remember" />
-                    <label htmlFor="remember">Ghi nhớ đăng nhập</label>
-                  </div>
-                  <button type="submit" className="btn btn-primary btn-block">Đăng nhập</button>
+                  <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
+                    {loading ? 'Đang đăng nhập…' : 'Đăng nhập'}
+                  </button>
                   <p className="form-foot">
                     Chưa có tài khoản? <Link href="/register">Đăng ký ngay</Link>
                   </p>

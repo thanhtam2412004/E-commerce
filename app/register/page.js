@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
@@ -6,10 +7,49 @@ import Footer from '@/components/Footer';
 
 export default function RegisterPage() {
   const router = useRouter();
+  const [form, setForm] = useState({ name: '', email: '', phone: '', password: '' });
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleRegister = (e) => {
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleRegister = async (e) => {
     e.preventDefault();
-    router.push('/login');
+    setError('');
+    setLoading(true);
+
+    try {
+      const res = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+
+      if (!data.success) {
+        setError(data.error || 'Đăng ký thất bại.');
+        return;
+      }
+
+      // Đăng ký xong → tự động login luôn
+      const loginRes = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: form.email, password: form.password }),
+      });
+      const loginData = await loginRes.json();
+
+      if (loginData.success) {
+        router.push('/account');
+        router.refresh();
+      } else {
+        router.push('/login');
+      }
+    } catch {
+      setError('Có lỗi xảy ra, vui lòng thử lại.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -23,27 +63,69 @@ export default function RegisterPage() {
                 <h1>Tạo tài khoản mới</h1>
                 <p className="sub">Trở thành hội viên Green Atelier để nhận ưu đãi đặc quyền.</p>
                 <form onSubmit={handleRegister}>
+                  {error && (
+                    <div className="form-error" role="alert" style={{ color: 'var(--red, #c0392b)', marginBottom: '12px', fontSize: '13.5px' }}>
+                      {error}
+                    </div>
+                  )}
                   <div className="field">
-                    <label>Họ và tên</label>
-                    <input type="text" required placeholder="Nguyễn Văn A" />
+                    <label htmlFor="name">Họ và tên</label>
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      placeholder="Nguyễn Văn A"
+                      value={form.name}
+                      onChange={handleChange}
+                      autoComplete="name"
+                    />
                   </div>
                   <div className="field">
-                    <label>Địa chỉ Email</label>
-                    <input type="email" required placeholder="bạn@email.com" />
+                    <label htmlFor="email">Địa chỉ Email</label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      placeholder="bạn@email.com"
+                      value={form.email}
+                      onChange={handleChange}
+                      autoComplete="email"
+                    />
                   </div>
                   <div className="field">
-                    <label>Số điện thoại</label>
-                    <input type="tel" required placeholder="0901 234 567" />
+                    <label htmlFor="phone">Số điện thoại</label>
+                    <input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      placeholder="0901 234 567"
+                      value={form.phone}
+                      onChange={handleChange}
+                      autoComplete="tel"
+                    />
                   </div>
                   <div className="field">
-                    <label>Mật khẩu</label>
-                    <input type="password" required placeholder="••••••••" />
+                    <label htmlFor="password">Mật khẩu</label>
+                    <input
+                      id="password"
+                      name="password"
+                      type="password"
+                      required
+                      placeholder="Ít nhất 6 ký tự"
+                      value={form.password}
+                      onChange={handleChange}
+                      autoComplete="new-password"
+                    />
                   </div>
                   <div className="checkbox-row">
                     <input type="checkbox" id="terms" required />
                     <label htmlFor="terms">Tôi đồng ý với điều khoản sử dụng</label>
                   </div>
-                  <button type="submit" className="btn btn-primary btn-block">Tạo tài khoản</button>
+                  <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
+                    {loading ? 'Đang tạo tài khoản…' : 'Tạo tài khoản'}
+                  </button>
                   <p className="form-foot">
                     Đã có tài khoản? <Link href="/login">Đăng nhập</Link>
                   </p>

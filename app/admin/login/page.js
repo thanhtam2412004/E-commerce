@@ -1,13 +1,48 @@
 'use client';
+import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 export default function AdminLoginPage() {
   const router = useRouter();
+  const [form, setForm] = useState({ email: 'admin@greenatelier.vn', password: '' });
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleAdminLogin = (e) => {
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleAdminLogin = async (e) => {
     e.preventDefault();
-    router.push('/admin/dashboard');
+    setError('');
+    setLoading(true);
+
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+
+      if (!data.success) {
+        setError(data.error || 'Đăng nhập thất bại.');
+        return;
+      }
+
+      if (data.user.role !== 'admin') {
+        setError('Tài khoản này không có quyền truy cập admin.');
+        // Logout ngay
+        await fetch('/api/auth/logout', { method: 'POST' });
+        return;
+      }
+
+      router.push('/admin/dashboard');
+      router.refresh();
+    } catch {
+      setError('Có lỗi xảy ra, vui lòng thử lại.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -31,15 +66,39 @@ export default function AdminLoginPage() {
           <p className="sub">Dành riêng cho quản trị viên hệ thống.</p>
 
           <form onSubmit={handleAdminLogin}>
+            {error && (
+              <div className="form-error" role="alert" style={{ color: '#e74c3c', marginBottom: '12px', fontSize: '13.5px' }}>
+                {error}
+              </div>
+            )}
             <div className="field">
-              <label>Email quản trị</label>
-              <input type="email" required defaultValue="admin@greenatelier.vn" />
+              <label htmlFor="email">Email quản trị</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                value={form.email}
+                onChange={handleChange}
+                autoComplete="email"
+              />
             </div>
             <div className="field">
-              <label>Mật khẩu</label>
-              <input type="password" required defaultValue="admin123" />
+              <label htmlFor="password">Mật khẩu</label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                required
+                placeholder="••••••••"
+                value={form.password}
+                onChange={handleChange}
+                autoComplete="current-password"
+              />
             </div>
-            <button type="submit" className="btn btn-primary btn-block">Đăng nhập Dashboard</button>
+            <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
+              {loading ? 'Đang đăng nhập…' : 'Đăng nhập Dashboard'}
+            </button>
             <p className="form-foot">
               <Link href="/">← Về trang cửa hàng</Link>
             </p>
