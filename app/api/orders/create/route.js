@@ -95,7 +95,7 @@ export async function POST(request) {
         const updated = await Product.findOneAndUpdate(
           { _id: item.id, stock: { $gte: item.qty } },
           { $inc: { stock: -item.qty } },
-          { session, new: true }
+          { session, returnDocument: 'after' }
         );
 
         if (!updated) {
