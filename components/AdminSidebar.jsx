@@ -1,11 +1,17 @@
 'use client';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 export default function AdminSidebar() {
   const pathname = usePathname();
-
+  const router   = useRouter();
   const isActive = (path) => pathname === path ? 'active' : '';
+
+  const handleLogout = async () => {
+    await fetch('/api/auth/logout', { method: 'POST' });
+    router.push('/admin/login');
+    router.refresh();
+  };
 
   return (
     <aside className="admin-sidebar">
@@ -19,14 +25,19 @@ export default function AdminSidebar() {
       </div>
       <nav className="admin-nav">
         <Link href="/admin/dashboard" className={isActive('/admin/dashboard')}>📊 Dashboard</Link>
-        <Link href="/admin/products" className={isActive('/admin/products')}>🍵 Sản phẩm</Link>
+        <Link href="/admin/products"  className={isActive('/admin/products')}>🍵 Sản phẩm</Link>
         <Link href="/admin/categories" className={isActive('/admin/categories')}>🏷 Danh mục</Link>
-        <Link href="/admin/orders" className={isActive('/admin/orders')}>📦 Đơn hàng</Link>
+        <Link href="/admin/orders"    className={isActive('/admin/orders')}>📦 Đơn hàng</Link>
         <Link href="/admin/customers" className={isActive('/admin/customers')}>👥 Khách hàng</Link>
-        <Link href="/admin/blogs" className={isActive('/admin/blogs')}>📝 Blog</Link>
+        <Link href="/admin/blogs"     className={isActive('/admin/blogs')}>📝 Blog</Link>
         <div className="divider"></div>
         <Link href="/">🏠 Xem cửa hàng</Link>
-        <Link href="/admin/login">↩ Đăng xuất</Link>
+        <button
+          onClick={handleLogout}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', padding: 0, font: 'inherit', color: 'inherit', width: '100%' }}
+        >
+          ↩ Đăng xuất
+        </button>
       </nav>
     </aside>
   );
