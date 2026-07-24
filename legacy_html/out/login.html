@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đăng nhập — Green Atelier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="storefront-shell">
+<header>
+<div class="wrap nav-row">
+<div class="logo" data-nav="home">
+<svg fill="none" height="26" viewbox="0 0 40 40" width="26"><circle cx="20" cy="20" r="18" stroke="#6B8E4E" stroke-width="2"></circle><circle cx="20" cy="20" r="11" stroke="#B98B3E" stroke-width="2"></circle><circle cx="20" cy="20" fill="#26402A" r="4"></circle></svg>
+        Green Atelier
+      </div>
+<nav class="nav-links">
+<a data-nav="home">Trang chủ</a>
+<a data-nav="shop">Cửa hàng</a>
+<a data-nav="finder">Matcha Finder</a>
+<a data-nav="blog">Blog</a>
+<a data-nav="about">Giới thiệu</a>
+<a data-nav="contact">Liên hệ</a>
+</nav>
+<div class="nav-actions">
+<div class="search-box">
+<svg fill="none" height="15" stroke="#5b6b57" stroke-width="2" viewbox="0 0 24 24" width="15"><circle cx="11" cy="11" r="7"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
+          Tìm sản phẩm...
+        </div>
+<button aria-label="Tài khoản" class="icon-btn" data-nav="login">
+<svg fill="none" height="19" stroke="#26402A" stroke-width="1.8" viewbox="0 0 24 24" width="19"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"></path></svg>
+</button>
+<button aria-label="Giỏ hàng" class="icon-btn" data-nav="cart">
+<svg fill="none" height="19" stroke="#26402A" stroke-width="1.8" viewbox="0 0 24 24" width="19"><path d="M3 3h2l2.6 13.4a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L22 6H6"></path><circle cx="9" cy="21" r="1.4"></circle><circle cx="18" cy="21" r="1.4"></circle></svg>
+<span class="badge">3</span>
+</button>
+</div>
+</div>
+</header>
+<main>
+<section class="page active" data-page="login">
+<div class="auth-shell">
+<div class="auth-form-side">
+<div class="auth-form-box">
+<h1>Chào mừng trở lại</h1>
+<p class="sub">Đăng nhập để theo dõi đơn hàng và ưu đãi dành riêng cho bạn.</p>
+<div class="field"><label>Email</label><input placeholder="ban@email.com" type="email"/></div>
+<div class="field"><label>Mật khẩu</label><input placeholder="••••••••" type="password"/></div>
+<div style="text-align:right;margin-bottom:18px;"><a class="btn-ghost" style="font-size:12.5px;">Quên mật khẩu?</a></div>
+<a class="btn btn-primary btn-block" data-nav="account">Đăng nhập</a>
+<p class="form-foot">Chưa có tài khoản? <a data-nav="register">Đăng ký ngay</a></p>
+</div>
+</div>
+<div class="auth-art-side">
+<svg class="admin-deco" height="380" style="left:-60px;top:-40px;" viewbox="0 0 380 380" width="380"><circle cx="190" cy="190" r="170" stroke="#8FAE6C" stroke-width="1.2"></circle><circle cx="190" cy="190" r="120" stroke="#D9AE6C" stroke-dasharray="2 10" stroke-width="1.2"></circle></svg>
+<div class="txt">
+<svg fill="none" height="46" viewbox="0 0 40 40" width="46"><circle cx="20" cy="20" r="18" stroke="#8FAE6C" stroke-width="2"></circle><circle cx="20" cy="20" r="11" stroke="#D9AE6C" stroke-width="2"></circle><circle cx="20" cy="20" fill="#fff" r="4"></circle></svg>
+<h2>Where Nature Brews Wellness</h2>
+<p>Mỗi tài khoản là một hành trình chăm sóc bản thân riêng — được cá nhân hoá theo mục tiêu của bạn.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="wrap">
+<div class="foot-grid">
+<div>
+<div class="foot-logo"><svg fill="none" height="26" viewbox="0 0 40 40" width="26"><circle cx="20" cy="20" r="18" stroke="#8FAE6C" stroke-width="2"></circle><circle cx="20" cy="20" r="11" stroke="#D9AE6C" stroke-width="2"></circle><circle cx="20" cy="20" fill="#fff" r="4"></circle></svg>Green Atelier</div>
+<p class="about-txt">Matcha nguyên chất từ Mộc Châu, chế tác thủ công cho từng khoảnh khắc chăm sóc bản thân.</p>
+<div class="social-row"><a href="#">f</a><a href="#">◎</a><a href="#">♪</a></div>
+</div>
+<div class="foot-col"><h4>Mua sắm</h4><ul>
+<li><a data-nav="shop">Tất cả sản phẩm</a></li><li><a data-nav="shop">Focus</a></li><li><a data-nav="shop">Energy</a></li><li><a data-nav="shop">Beauty</a></li>
+</ul></div>
+<div class="foot-col"><h4>Hỗ trợ</h4><ul>
+<li><a data-nav="contact">Liên hệ</a></li><li><a data-nav="account">Theo dõi đơn hàng</a></li><li><a data-nav="login">Đăng nhập</a></li><li><a data-nav="register">Đăng ký</a></li>
+</ul></div>
+<div class="foot-col"><h4>Green Atelier</h4><ul>
+<li><a data-nav="about">Câu chuyện thương hiệu</a></li><li><a data-nav="blog">Blog</a></li><li><a data-nav="finder">Matcha Finder</a></li>
+</ul></div>
+</div>
+<div class="wrap bottom-bar">
+<span>© 2026 Green Atelier. All rights reserved.</span>
+<a data-nav="admin-login">Quản trị viên →</a>
+</div>
+</div>
+</footer>
+</div>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Green Atelier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div id="admin-shell">
+  <div class="admin-app show">
+    <aside class="admin-sidebar">
+<div class="admin-logo"><svg fill="none" height="22" viewbox="0 0 40 40" width="22"><circle cx="20" cy="20" r="18" stroke="#8FAE6C" stroke-width="2"></circle><circle cx="20" cy="20" r="11" stroke="#D9AE6C" stroke-width="2"></circle><circle cx="20" cy="20" fill="#fff" r="4"></circle></svg>Green Atelier</div>
+<nav class="admin-nav">
+<a class="active" data-nav="admin-dashboard">📊 Dashboard</a>
+<a data-nav="admin-products">🍵 Sản phẩm</a>
+<a data-nav="admin-categories">🏷 Danh mục</a>
+<a data-nav="admin-orders">📦 Đơn hàng</a>
+<a data-nav="admin-customers">👥 Khách hàng</a>
+<a data-nav="admin-blogs">📝 Blog</a>
+<div class="divider"></div>
+<a data-nav="home">🏠 Xem cửa hàng</a>
+<a data-nav="admin-login">↩ Đăng xuất</a>
+</nav>
+</aside>
+    <div class="admin-main">
+      <section class="admin-page active" data-page="admin-dashboard">
+<div class="admin-topbar"><h2>Dashboard</h2><div class="admin-topbar-right"><span>👤 Admin</span></div></div>
+<div class="admin-content">
+<div class="stat-grid">
+<div class="stat-card"><div class="lbl">Tổng doanh thu</div><div class="val">148,2tr₫</div><div class="delta">▲ 12.4% so với tháng trước</div></div>
+<div class="stat-card"><div class="lbl">Tổng đơn hàng</div><div class="val">1,284</div><div class="delta">▲ 6.1%</div></div>
+<div class="stat-card"><div class="lbl">Tổng khách hàng</div><div class="val">2,430</div><div class="delta">▲ 3.8%</div></div>
+<div class="stat-card"><div class="lbl">Sản phẩm đang bán</div><div class="val">32</div><div class="delta" style="color:#8b9584;">Ổn định</div></div>
+</div>
+<div class="chart-grid">
+<div class="chart-card">
+<h4>Doanh thu theo tháng</h4>
+<div class="bar-chart">
+<div class="bar" style="height:40%"></div><div class="bar" style="height:55%"></div><div class="bar" style="height:48%"></div>
+<div class="bar" style="height:70%"></div><div class="bar" style="height:62%"></div><div class="bar" style="height:85%"></div>
+<div class="bar" style="height:78%"></div><div class="bar" style="height:95%"></div>
+</div>
+</div>
+<div class="chart-card">
+<h4>Số lượng đơn hàng</h4>
+<svg height="160" viewbox="0 0 220 160" width="100%">
+<polyline fill="none" points="0,120 30,100 60,110 90,70 120,80 150,40 180,55 220,20" stroke="#B98B3E" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></polyline>
+</svg>
+</div>
+</div>
+</div>
+</section>
+    </div>
+  </div>
+</div>
+
+<script src="../js/app.js"></script>
+</body>
+</html>
