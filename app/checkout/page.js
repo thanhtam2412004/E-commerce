@@ -9,22 +9,72 @@ import useCartStore from '@/store/cartStore';
 const SHIPPING_FEE = 30000;
 
 export default function CheckoutPage() {
-  const router = useRouter();
-  const items = useCartStore((s) => s.items);
+  const router   = useRouter();
+  const items    = useCartStore((s) => s.items);
   const clearCart = useCartStore((s) => s.clearCart);
+
+  const [form, setForm] = useState({
+    name: '', email: '', phone: '', address: '', note: '',
+  });
   const [payMethod, setPayMethod] = useState('cod');
+  const [loading, setLoading]    = useState(false);
+  const [error, setError]        = useState('');
 
   const subtotal = items.reduce((sum, i) => sum + i.price * i.qty, 0);
   const shipping = subtotal > 0 ? SHIPPING_FEE : 0;
-  const total = subtotal + shipping;
+  const total    = subtotal + shipping;
 
-  const handleSubmitOrder = (e) => {
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleSubmitOrder = async (e) => {
     e.preventDefault();
-    // P3-5 sẽ gọi /api/orders/create thật — tạm thời clear cart và redirect
-    clearCart();
-    router.push('/account');
+    setError('');
+    setLoading(true);
+
+    try {
+      const res = await fetch('/api/orders/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          customerInfo: {
+            name:    form.name,
+            email:   form.email,
+            phone:   form.phone,
+            address: form.address,
+            note:    form.note,
+          },
+          items: items.map((i) => ({
+            id:   i.id,
+            name: i.name,
+            price: i.price,
+            qty:  i.qty,
+            grad: i.grad,
+          })),
+          paymentMethod: payMethod,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!data.success) {
+        setError(data.error || 'Đặt hàng thất bại, vui lòng thử lại.');
+        return;
+      }
+
+      // Xóa giỏ hàng rồi chuyển trang thành công
+      clearCart();
+      router.push(
+        `/order-success?order=${encodeURIComponent(data.order.orderNumber)}&total=${data.order.total}`
+      );
+    } catch {
+      setError('Có lỗi xảy ra, vui lòng thử lại.');
+    } finally {
+      setLoading(false);
+    }
   };
 
+  // Giỏ trống
   if (items.length === 0) {
     return (
       <>
@@ -68,32 +118,70 @@ export default function CheckoutPage() {
               <form onSubmit={handleSubmitOrder} className="checkout-layout">
                 <div>
                   <h3 style={{ fontSize: '20px', marginBottom: '20px' }}>Thông tin người nhận</h3>
+
+                  {error && (
+                    <div role="alert" style={{
+                      padding: '12px 16px', borderRadius: '10px', marginBottom: '16px',
+                      background: '#fef2f2', border: '1px solid #fecaca',
+                      color: '#c0392b', fontSize: '13.5px',
+                    }}>
+                      {error}
+                    </div>
+                  )}
+
                   <div className="field">
-                    <label>Họ và tên *</label>
-                    <input type="text" required placeholder="Nguyễn Văn A" />
+                    <label htmlFor="co-name">Họ và tên *</label>
+                    <input
+                      id="co-name" name="name" type="text" required
+                      placeholder="Nguyễn Văn A"
+                      value={form.name} onChange={handleChange}
+                      autoComplete="name"
+                    />
                   </div>
                   <div className="field-row">
                     <div className="field">
-                      <label>Số điện thoại *</label>
-                      <input type="tel" required placeholder="0901 234 567" />
+                      <label htmlFor="co-phone">Số điện thoại *</label>
+                      <input
+                        id="co-phone" name="phone" type="tel" required
+                        placeholder="0901 234 567"
+                        value={form.phone} onChange={handleChange}
+                        autoComplete="tel"
+                      />
                     </div>
                     <div className="field">
-                      <label>Email *</label>
-                      <input type="email" required placeholder="bạn@email.com" />
+                      <label htmlFor="co-email">Email *</label>
+                      <input
+                        id="co-email" name="email" type="email" required
+                        placeholder="bạn@email.com"
+                        value={form.email} onChange={handleChange}
+                        autoComplete="email"
+                      />
                     </div>
                   </div>
                   <div className="field">
-                    <label>Địa chỉ nhận hàng *</label>
-                    <input type="text" required placeholder="Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/thành phố" />
+                    <label htmlFor="co-address">Địa chỉ nhận hàng *</label>
+                    <input
+                      id="co-address" name="address" type="text" required
+                      placeholder="Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/thành"
+                      value={form.address} onChange={handleChange}
+                      autoComplete="street-address"
+                    />
                   </div>
                   <div className="field">
-                    <label>Ghi chú đơn hàng (không bắt buộc)</label>
-                    <textarea rows="3" placeholder="Ghi chú về thời gian giao hàng hoặc chỉ dẫn địa điểm..."></textarea>
+                    <label htmlFor="co-note">Ghi chú (không bắt buộc)</label>
+                    <textarea
+                      id="co-note" name="note" rows="3"
+                      placeholder="Ghi chú về thời gian giao hàng hoặc chỉ dẫn địa điểm..."
+                      value={form.note} onChange={handleChange}
+                    />
                   </div>
 
                   <h3 style={{ fontSize: '20px', margin: '30px 0 16px' }}>Phương thức thanh toán</h3>
 
-                  <div className={`pay-option ${payMethod === 'cod' ? 'active' : ''}`} onClick={() => setPayMethod('cod')}>
+                  <div
+                    className={`pay-option ${payMethod === 'cod' ? 'active' : ''}`}
+                    onClick={() => setPayMethod('cod')}
+                  >
                     <input type="radio" name="pay" readOnly checked={payMethod === 'cod'} />
                     <div>
                       <h5>Thanh toán khi nhận hàng (COD)</h5>
@@ -101,7 +189,10 @@ export default function CheckoutPage() {
                     </div>
                   </div>
 
-                  <div className={`pay-option ${payMethod === 'bank' ? 'active' : ''}`} onClick={() => setPayMethod('bank')}>
+                  <div
+                    className={`pay-option ${payMethod === 'bank' ? 'active' : ''}`}
+                    onClick={() => setPayMethod('bank')}
+                  >
                     <input type="radio" name="pay" readOnly checked={payMethod === 'bank'} />
                     <div>
                       <h5>Chuyển khoản Ngân hàng (QR Code)</h5>
@@ -110,11 +201,12 @@ export default function CheckoutPage() {
                   </div>
                 </div>
 
+                {/* Order summary */}
                 <div className="summary-card">
                   <h3 style={{ fontSize: '18px', marginBottom: '16px' }}>Đơn hàng của bạn</h3>
                   {items.map((item) => (
                     <div key={item.id} className="mini-item">
-                      <span>{item.name} x {item.qty}</span>
+                      <span>{item.name} × {item.qty}</span>
                       <b>{(item.price * item.qty).toLocaleString('vi-VN')}₫</b>
                     </div>
                   ))}
@@ -131,8 +223,13 @@ export default function CheckoutPage() {
                     <span>Tổng cộng</span>
                     <span>{total.toLocaleString('vi-VN')}₫</span>
                   </div>
-                  <button type="submit" className="btn btn-primary btn-block" style={{ marginTop: '20px' }}>
-                    Xác nhận đặt hàng →
+                  <button
+                    type="submit"
+                    className="btn btn-primary btn-block"
+                    style={{ marginTop: '20px' }}
+                    disabled={loading}
+                  >
+                    {loading ? 'Đang xử lý...' : 'Xác nhận đặt hàng →'}
                   </button>
                 </div>
               </form>
