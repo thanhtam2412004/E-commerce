@@ -1,11 +1,19 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import useCartStore from '@/store/cartStore';
 
 export default function Header() {
   const pathname = usePathname();
+  const isActive = (path) => (pathname === path ? 'active' : '');
 
-  const isActive = (path) => pathname === path ? 'active' : '';
+  // Tránh hydration mismatch: chỉ render badge sau khi mount client
+  const [mounted, setMounted] = useState(false);
+  const items = useCartStore((s) => s.items);
+  const totalQty = items.reduce((sum, i) => sum + i.qty, 0);
+
+  useEffect(() => setMounted(true), []);
 
   return (
     <header>
@@ -46,7 +54,9 @@ export default function Header() {
               <circle cx="9" cy="21" r="1.4"></circle>
               <circle cx="18" cy="21" r="1.4"></circle>
             </svg>
-            <span className="badge">3</span>
+            {mounted && totalQty > 0 && (
+              <span className="badge">{totalQty > 99 ? '99+' : totalQty}</span>
+            )}
           </Link>
         </div>
       </div>

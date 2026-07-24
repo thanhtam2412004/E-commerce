@@ -1,26 +1,20 @@
 'use client';
-import { useState } from 'react';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import useCartStore from '@/store/cartStore';
+
+const SHIPPING_FEE = 30000;
 
 export default function CartPage() {
-  const [items, setItems] = useState([
-    { id: '1', name: 'Matcha Mộc Châu Cổ Điển', cat: 'Ceremonial Grade', price: 285000, qty: 1, grad: 'linear-gradient(150deg,#DCE6C8,#B9C9A6)' },
-    { id: '2', name: 'Matcha Genki Boost', cat: 'Đặc tuyển', price: 320000, qty: 2, grad: 'linear-gradient(150deg,#F3E3C2,#D9AE6C)' },
-  ]);
+  const items = useCartStore((s) => s.items);
+  const updateQty = useCartStore((s) => s.updateQty);
+  const removeItem = useCartStore((s) => s.removeItem);
 
-  const updateQty = (id, delta) => {
-    setItems(items.map(item => item.id === id ? { ...item, qty: Math.max(1, item.qty + delta) } : item));
-  };
-
-  const removeItem = (id) => {
-    setItems(items.filter(item => item.id !== id));
-  };
-
-  const subtotal = items.reduce((sum, item) => sum + item.price * item.qty, 0);
-  const shipping = subtotal > 0 ? 30000 : 0;
+  const subtotal = items.reduce((sum, i) => sum + i.price * i.qty, 0);
+  const shipping = subtotal > 0 ? SHIPPING_FEE : 0;
   const total = subtotal + shipping;
+  const totalQty = items.reduce((sum, i) => sum + i.qty, 0);
 
   return (
     <>
@@ -35,7 +29,7 @@ export default function CartPage() {
                 <span className="cur">Giỏ hàng</span>
               </div>
               <div className="page-head">
-                <h1>Giỏ hàng của bạn ({items.length})</h1>
+                <h1>Giỏ hàng của bạn ({totalQty})</h1>
               </div>
 
               <div className="cart-layout">
@@ -52,7 +46,9 @@ export default function CartPage() {
                         <div>
                           <span className="cat-label">{item.cat}</span>
                           <h4>{item.name}</h4>
-                          <span style={{ fontSize: '13.5px', color: 'var(--matcha)', fontWeight: 700 }}>{item.price.toLocaleString('vi-VN')}₫</span>
+                          <span style={{ fontSize: '13.5px', color: 'var(--matcha)', fontWeight: 700 }}>
+                            {item.price.toLocaleString('vi-VN')}₫
+                          </span>
                         </div>
                         <div className="qty-selector">
                           <button onClick={() => updateQty(item.id, -1)}>-</button>
@@ -62,7 +58,9 @@ export default function CartPage() {
                         <div style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, fontSize: '16px' }}>
                           {(item.price * item.qty).toLocaleString('vi-VN')}₫
                         </div>
-                        <button className="remove-x" onClick={() => removeItem(item.id)}>✕</button>
+                        <button className="remove-x" onClick={() => removeItem(item.id)} aria-label="Xóa sản phẩm">
+                          ✕
+                        </button>
                       </div>
                     ))
                   )}
@@ -86,9 +84,15 @@ export default function CartPage() {
                     <span>Tổng cộng</span>
                     <span>{total.toLocaleString('vi-VN')}₫</span>
                   </div>
-                  <Link href="/checkout" className="btn btn-primary btn-block" style={{ marginTop: '20px' }}>
-                    Tiến hành thanh toán →
-                  </Link>
+                  {items.length > 0 ? (
+                    <Link href="/checkout" className="btn btn-primary btn-block" style={{ marginTop: '20px' }}>
+                      Tiến hành thanh toán →
+                    </Link>
+                  ) : (
+                    <button className="btn btn-primary btn-block" disabled style={{ marginTop: '20px', opacity: 0.5 }}>
+                      Tiến hành thanh toán →
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

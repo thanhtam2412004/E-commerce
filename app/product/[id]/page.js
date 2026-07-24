@@ -1,15 +1,33 @@
 'use client';
-import { useState } from 'react';
+import { useState, use } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
 import { mockProducts } from '@/data/mockData';
+import useCartStore from '@/store/cartStore';
 
 export default function ProductDetailPage({ params }) {
+  const router = useRouter();
   const [qty, setQty] = useState(1);
-  const product = mockProducts.find((p) => p.id === params?.id) || mockProducts[0];
-  const relatedProducts = mockProducts.slice(4, 8);
+  const [added, setAdded] = useState(false);
+  const addItem = useCartStore((s) => s.addItem);
+
+  const { id } = use(params);
+  const product = mockProducts.find((p) => p.id === id) || mockProducts[0];
+  const relatedProducts = mockProducts.filter((p) => p.id !== product.id).slice(0, 4);
+
+  const handleAddToCart = () => {
+    addItem(product, qty);
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2000);
+  };
+
+  const handleBuyNow = () => {
+    addItem(product, qty);
+    router.push('/cart');
+  };
 
   return (
     <>
@@ -47,7 +65,9 @@ export default function ProductDetailPage({ params }) {
                     ★★★★★ <span>(48 đánh giá)</span>
                   </div>
                   <div className="pd-price">{product.price}</div>
-                  <p className="pd-desc">{product.desc} Thu hoạch vụ xuân đầu tiên tại cao nguyên Mộc Châu, xay mịn bằng cối đá thủ công để giữ được sắc xanh ngọc bảo và hàm lượng L-theanine cao nhất.</p>
+                  <p className="pd-desc">
+                    {product.desc} Thu hoạch vụ xuân đầu tiên tại cao nguyên Mộc Châu, xay mịn bằng cối đá thủ công để giữ được sắc xanh ngọc bảo và hàm lượng L-theanine cao nhất.
+                  </p>
 
                   <div className="pd-block">
                     <h4>Đặc điểm nổi bật</h4>
@@ -65,10 +85,23 @@ export default function ProductDetailPage({ params }) {
                       <input type="text" value={qty} readOnly />
                       <button onClick={() => setQty(qty + 1)}>+</button>
                     </div>
-                    <button className="btn btn-primary" onClick={() => alert(`Đã thêm ${qty} x ${product.name} vào giỏ hàng!`)}>
-                      Thêm vào giỏ hàng — {(product.rawPrice * qty).toLocaleString('vi-VN')}₫
+                    <button
+                      className="btn btn-primary"
+                      onClick={handleAddToCart}
+                      style={added ? { background: 'var(--matcha, #6B8E4E)' } : {}}
+                    >
+                      {added
+                        ? '✓ Đã thêm vào giỏ!'
+                        : `Thêm vào giỏ hàng — ${(product.rawPrice * qty).toLocaleString('vi-VN')}₫`}
                     </button>
                   </div>
+                  <button
+                    className="btn btn-outline btn-block"
+                    style={{ marginTop: '10px' }}
+                    onClick={handleBuyNow}
+                  >
+                    Mua ngay →
+                  </button>
                 </div>
               </div>
 
