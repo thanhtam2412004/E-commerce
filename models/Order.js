@@ -52,12 +52,11 @@ const OrderSchema = new mongoose.Schema(
 );
 
 // Tự động sinh orderNumber dạng #GA-xxxx trước khi lưu
-OrderSchema.pre('save', async function (next) {
+OrderSchema.pre('save', async function () {
   if (this.isNew) {
     const count = await mongoose.models.Order.countDocuments();
     this.orderNumber = `#GA-${String(1000 + count + 1).padStart(4, '0')}`;
   }
-  next();
 });
 
 export default mongoose.models.Order || mongoose.model('Order', OrderSchema);

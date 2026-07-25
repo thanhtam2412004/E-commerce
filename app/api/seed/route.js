@@ -33,9 +33,19 @@ const seedBlogs = [
 ];
 
 export async function GET() {
-  try {
-    await dbConnect();
+  const connection = await dbConnect();
 
+  if (!connection) {
+    return Response.json(
+      {
+        success: false,
+        error: 'MongoDB is unavailable. Add your current IP to the Atlas whitelist or run a local MongoDB instance.',
+      },
+      { status: 503 }
+    );
+  }
+
+  try {
     // Xóa dữ liệu cũ trước khi seed
     await User.deleteMany({ role: 'admin' });
     await Category.deleteMany({});
