@@ -17,7 +17,13 @@ export default function AdminSidebar() {
   return (
     <aside className="admin-sidebar">
       <div className="admin-logo">
-        <Image src="/logo.jpeg" alt="Green Atelier" width={24} height={24} style={{ borderRadius: '4px', objectFit: 'cover' }} />
+        <Image
+          src="/logo.jpeg"
+          alt="Green Atelier"
+          width={28}
+          height={28}
+          style={{ objectFit: 'contain', mixBlendMode: 'multiply', background: '#fff', borderRadius: '4px', padding: '2px' }}
+        />
         Green Atelier
       </div>
       <nav className="admin-nav">

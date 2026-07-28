@@ -8,7 +8,13 @@ export default function Footer() {
         <div className="foot-grid">
           <div>
             <div className="foot-logo">
-              <Image src="/logo.jpeg" alt="Green Atelier" width={28} height={28} style={{ borderRadius: '4px', objectFit: 'cover' }} />
+              <Image
+                src="/logo.jpeg"
+                alt="Green Atelier"
+                width={32}
+                height={32}
+                style={{ objectFit: 'contain', mixBlendMode: 'multiply' }}
+              />
               Green Atelier
             </div>
             <p className="about-txt">Matcha nguyên chất từ Mộc Châu, chế tác thủ công cho từng khoảnh khắc chăm sóc bản thân.</p>

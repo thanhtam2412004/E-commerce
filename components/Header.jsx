@@ -20,7 +20,14 @@ export default function Header() {
     <header>
       <div className="wrap nav-row">
         <Link href="/" className="logo">
-          <Image src="/logo.jpeg" alt="Green Atelier" width={32} height={32} style={{ borderRadius: '4px', objectFit: 'cover' }} />
+          <Image
+            src="/logo.jpeg"
+            alt="Green Atelier"
+            width={36}
+            height={36}
+            style={{ objectFit: 'contain', mixBlendMode: 'multiply' }}
+            priority
+          />
           Green Atelier
         </Link>
         <nav className="nav-links">
