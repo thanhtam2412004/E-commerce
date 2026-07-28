@@ -9,11 +9,11 @@ export default function Footer() {
           <div>
             <div className="foot-logo">
               <Image
-                src="/logo.jpeg"
+                src="/logo.png"
                 alt="Green Atelier"
-                width={32}
-                height={32}
-                style={{ objectFit: 'contain', mixBlendMode: 'multiply' }}
+                width={36}
+                height={36}
+                style={{ objectFit: 'contain' }}
               />
               Green Atelier
             </div>

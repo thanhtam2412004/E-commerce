@@ -18,11 +18,11 @@ export default function AdminSidebar() {
     <aside className="admin-sidebar">
       <div className="admin-logo">
         <Image
-          src="/logo.jpeg"
+          src="/logo.png"
           alt="Green Atelier"
-          width={28}
-          height={28}
-          style={{ objectFit: 'contain', mixBlendMode: 'multiply', background: '#fff', borderRadius: '4px', padding: '2px' }}
+          width={32}
+          height={32}
+          style={{ objectFit: 'contain' }}
         />
         Green Atelier
       </div>

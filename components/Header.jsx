@@ -21,11 +21,11 @@ export default function Header() {
       <div className="wrap nav-row">
         <Link href="/" className="logo">
           <Image
-            src="/logo.jpeg"
+            src="/logo.png"
             alt="Green Atelier"
-            width={36}
-            height={36}
-            style={{ objectFit: 'contain', mixBlendMode: 'multiply' }}
+            width={40}
+            height={40}
+            style={{ objectFit: 'contain' }}
             priority
           />
           Green Atelier
