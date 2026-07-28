@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 
 export default function AdminSidebar() {
@@ -16,11 +17,7 @@ export default function AdminSidebar() {
   return (
     <aside className="admin-sidebar">
       <div className="admin-logo">
-        <svg fill="none" height="22" viewBox="0 0 40 40" width="22">
-          <circle cx="20" cy="20" r="18" stroke="#8FAE6C" strokeWidth="2"></circle>
-          <circle cx="20" cy="20" r="11" stroke="#D9AE6C" strokeWidth="2"></circle>
-          <circle cx="20" cy="20" fill="#fff" r="4"></circle>
-        </svg>
+        <Image src="/logo.jpeg" alt="Green Atelier" width={24} height={24} style={{ borderRadius: '4px', objectFit: 'cover' }} />
         Green Atelier
       </div>
       <nav className="admin-nav">

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -7,11 +8,7 @@ export default function Footer() {
         <div className="foot-grid">
           <div>
             <div className="foot-logo">
-              <svg fill="none" height="26" viewBox="0 0 40 40" width="26">
-                <circle cx="20" cy="20" r="18" stroke="#8FAE6C" strokeWidth="2"></circle>
-                <circle cx="20" cy="20" r="11" stroke="#D9AE6C" strokeWidth="2"></circle>
-                <circle cx="20" cy="20" fill="#fff" r="4"></circle>
-              </svg>
+              <Image src="/logo.jpeg" alt="Green Atelier" width={28} height={28} style={{ borderRadius: '4px', objectFit: 'cover' }} />
               Green Atelier
             </div>
             <p className="about-txt">Matcha nguyên chất từ Mộc Châu, chế tác thủ công cho từng khoảnh khắc chăm sóc bản thân.</p>
