@@ -21,7 +21,7 @@ export default function Header() {
       <div className="wrap nav-row">
         <Link href="/" className="logo">
           <Image
-            src="/logo.jpeg"
+            src="/logo.png"
             alt="Green Atelier"
             width={40}
             height={40}
