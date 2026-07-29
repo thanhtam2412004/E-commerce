@@ -3,6 +3,10 @@ import './globals.css';
 export const metadata = {
   title: 'Green Atelier — Matcha Mộc Châu Chế Tác Thủ Công',
   description: 'Trà matcha nguyên chất từ cao nguyên Mộc Châu, chế tác thủ công cho từng khoảnh khắc chăm sóc bản thân.',
+  icons: {
+    icon: '/logo.png',
+    apple: '/logo.png',
+  },
 };
 
 export default function RootLayout({ children }) {

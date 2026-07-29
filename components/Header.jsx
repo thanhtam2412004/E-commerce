@@ -20,11 +20,14 @@ export default function Header() {
     <header>
       <div className="wrap nav-row">
         <Link href="/" className="logo">
-          <svg fill="none" height="26" viewBox="0 0 40 40" width="26">
-            <circle cx="20" cy="20" r="18" stroke="#6B8E4E" strokeWidth="2"></circle>
-            <circle cx="20" cy="20" r="11" stroke="#B98B3E" strokeWidth="2"></circle>
-            <circle cx="20" cy="20" fill="#26402A" r="4"></circle>
-          </svg>
+          <Image
+            src="/logo.png"
+            alt="Green Atelier"
+            width={40}
+            height={40}
+            className="logo-img"
+            priority
+          />
           Green Atelier
         </Link>
         <nav className="nav-links">
