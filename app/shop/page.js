@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -47,6 +47,8 @@ export default function ShopPage() {
   const [products, setProducts]     = useState([]);
   const [pagination, setPagination] = useState({ total: 0, totalPages: 1 });
   const [loading, setLoading]       = useState(true);
+  const [loadError, setLoadError]   = useState('');
+  const latestRequest               = useRef(0);
 
   // ── Debounce search ───────────────────────────────────────────────────────
   useEffect(() => {
@@ -59,7 +61,9 @@ export default function ShopPage() {
 
   // ── Fetch products từ API ─────────────────────────────────────────────────
   const fetchProducts = useCallback(async () => {
+    const requestId = ++latestRequest.current;
     setLoading(true);
+    setLoadError('');
     try {
       const url = buildApiUrl({
         q,
@@ -68,22 +72,29 @@ export default function ShopPage() {
         sort,
         page,
       });
-      const res  = await fetch(url);
+      const res  = await fetch(url, { cache: 'no-store' });
       const data = await res.json();
-      if (data.success) {
-        // Normalize _id → id cho ProductCard
-        setProducts(data.data.map((p) => ({ ...p, id: p._id })));
-        setPagination(data.pagination);
+      if (requestId !== latestRequest.current) return;
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || 'Không thể lọc sản phẩm.');
       }
+      // Normalize _id → id cho ProductCard
+      setProducts(data.data.map((p) => ({ ...p, id: p._id })));
+      setPagination(data.pagination);
     } catch (err) {
+      if (requestId !== latestRequest.current) return;
       console.error('Fetch products error:', err);
+      setProducts([]);
+      setPagination({ total: 0, totalPages: 1 });
+      setLoadError(err.message || 'Không thể lọc sản phẩm.');
     } finally {
-      setLoading(false);
+      if (requestId === latestRequest.current) setLoading(false);
     }
   }, [q, tags, priceRange, sort, page]);
 
   useEffect(() => {
-    fetchProducts();
+    const timer = setTimeout(fetchProducts, 0);
+    return () => clearTimeout(timer);
   }, [fetchProducts]);
 
   // ── Handlers ──────────────────────────────────────────────────────────────
@@ -228,6 +239,11 @@ export default function ShopPage() {
                   {loading ? (
                     <div style={{ padding: '60px', textAlign: 'center', color: '#5b6b57' }}>
                       Đang tải sản phẩm...
+                    </div>
+                  ) : loadError ? (
+                    <div style={{ padding: '60px', textAlign: 'center', color: 'var(--red)' }}>
+                      <p style={{ marginBottom: '16px' }}>{loadError}</p>
+                      <button className="btn btn-outline" onClick={fetchProducts}>Thử lại</button>
                     </div>
                   ) : products.length === 0 ? (
                     <div style={{ padding: '60px', textAlign: 'center', color: '#5b6b57' }}>
