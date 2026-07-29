@@ -1,4 +1,19 @@
 import './globals.css';
+import { Fraunces, Manrope } from 'next/font/google';
+
+const fraunces = Fraunces({
+  subsets: ['latin', 'vietnamese'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-fraunces',
+});
+
+const manrope = Manrope({
+  subsets: ['latin', 'vietnamese'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-manrope',
+});
 
 export const metadata = {
   title: 'Green Atelier — Matcha Mộc Châu Chế Tác Thủ Công',
@@ -11,7 +26,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="vi">
+    <html lang="vi" className={`${manrope.variable} ${fraunces.variable}`}>
       <body>
         <div id="storefront-shell">
           {children}

@@ -55,7 +55,7 @@ export default function CartPage() {
                           <input type="text" value={item.qty} readOnly />
                           <button onClick={() => updateQty(item.id, 1)}>+</button>
                         </div>
-                        <div style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, fontSize: '16px' }}>
+                        <div style={{ fontFamily: 'var(--font-serif)', fontWeight: 600, fontSize: '16px' }}>
                           {(item.price * item.qty).toLocaleString('vi-VN')}₫
                         </div>
                         <button className="remove-x" onClick={() => removeItem(item.id)} aria-label="Xóa sản phẩm">
