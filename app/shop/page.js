@@ -130,7 +130,7 @@ export default function ShopPage() {
               <div className="shop-layout">
                 {/* FILTER SIDEBAR */}
                 <aside className="filter-box">
-                  <h4>Tìm kiếm</h4>
+                  <h4>TÌM KIẾM</h4>
                   <div style={{ position: 'relative', marginBottom: '20px' }}>
                     <input
                       type="text"
@@ -158,7 +158,7 @@ export default function ShopPage() {
                   </div>
 
                   <div className="filter-divider"></div>
-                  <h4>Danh mục</h4>
+                  <h4>DANH MỤC</h4>
                   {TAGS.map((tag) => (
                     <label key={tag} className="filter-item">
                       <input
@@ -171,7 +171,7 @@ export default function ShopPage() {
                   ))}
 
                   <div className="filter-divider"></div>
-                  <h4>Khoảng giá</h4>
+                  <h4>KHOẢNG GIÁ</h4>
                   {PRICE_RANGES.map((range, idx) => (
                     <label key={idx} className="filter-item">
                       <input
