@@ -8,9 +8,9 @@ import ProductCard from '@/components/ProductCard';
 const TAGS = ['Focus', 'Energy', 'Calm', 'Beauty', 'Immunity'];
 
 const PRICE_RANGES = [
-  { label: 'Dưới 300.000₫',        min: 0,      max: 299999 },
-  { label: '300.000₫ – 350.000₫',  min: 300000, max: 350000 },
-  { label: 'Trên 350.000₫',        min: 350001, max: 0      },
+  { label: 'Dưới 350.000₫',        min: 0,      max: 349999 },
+  { label: '350.000₫ – 450.000₫',  min: 350000, max: 450000 },
+  { label: 'Trên 450.000₫',        min: 450001, max: 0      },
 ];
 
 const SORT_OPTIONS = [
