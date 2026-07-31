@@ -25,7 +25,7 @@ export default function HomePage() {
                   <em style={{ fontStyle: 'italic', color: 'var(--matcha)', fontWeight: 500 }}>Brews</em> Wellness.
                 </h1>
                 <p style={{ fontSize: '17px', lineHeight: 1.6, color: '#3f4d3d', maxWidth: '460px', marginBottom: '34px' }}>
-                  Pure matcha from the Mộc Châu Highlands, carefully selected and finely stone-ground to preserve its full flavor and nutrients.
+                  Matcha nguyên chất từ cao nguyên Mộc Châu, tuyển chọn và xay mịn thủ công để giữ trọn hương vị và dưỡng chất.
                 </p>
                 <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
                   <Link href="/shop" className="btn btn-primary">
