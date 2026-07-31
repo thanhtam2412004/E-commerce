@@ -13,6 +13,7 @@ export default function ProductDetailPage({ params }) {
   const router = useRouter();
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(0);
   const addItem = useCartStore((s) => s.addItem);
 
   const { id } = use(params);
@@ -48,9 +49,9 @@ export default function ProductDetailPage({ params }) {
               <div className="pd-grid">
                 <div>
                   <div className="pd-gallery-main" style={{ background: product.grad }}>
-                    {product.images?.[0] ? (
+                    {product.images?.[selectedImage] ? (
                       <Image
-                        src={product.images[0]}
+                        src={product.images[selectedImage]}
                         alt={product.name}
                         fill
                         priority
@@ -64,13 +65,21 @@ export default function ProductDetailPage({ params }) {
                     )}
                   </div>
                   <div className="pd-thumbs">
-                    <div className="active pd-thumb" style={{ background: product.grad }}>
-                      {product.images?.[0] && (
-                        <Image src={product.images[0]} alt="" fill sizes="64px" />
-                      )}
-                    </div>
-                    <div style={{ background: 'linear-gradient(150deg,#F3E3C2,#D9AE6C)' }}></div>
-                    <div style={{ background: 'linear-gradient(150deg,#E4D9E8,#C9B8D6)' }}></div>
+                    {product.images?.length ? (
+                      product.images.map((image, index) => (
+                        <button
+                          key={image}
+                          type="button"
+                          className={`pd-thumb${selectedImage === index ? ' active' : ''}`}
+                          onClick={() => setSelectedImage(index)}
+                          aria-label={`Xem ảnh ${index + 1} của ${product.name}`}
+                        >
+                          <Image src={image} alt="" fill sizes="64px" />
+                        </button>
+                      ))
+                    ) : (
+                      <div className="active" style={{ background: product.grad }}></div>
+                    )}
                   </div>
                 </div>
 
