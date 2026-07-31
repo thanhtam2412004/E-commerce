@@ -10,7 +10,7 @@ export default function FinderPage() {
   const goals = [
     { key: 'Focus', label: 'Tập trung', desc: 'Dành cho công việc và học tập cường độ cao', recProduct: 'Matcha Mộc Châu Cổ Điển', recPrice: '285.000₫', recTag: 'Ceremonial Grade' },
     { key: 'Energy', label: 'Năng lượng', desc: 'Dành cho buổi sáng sung sức và tập luyện', recProduct: 'Matcha Genki Boost', recPrice: '320.000₫', recTag: 'Đặc tuyển' },
-    { key: 'Calm', label: 'Thư giãn', desc: 'Giúp thả lỏng tâm trí và giải tỏa căng thẳng', recProduct: 'Matcha Lavender Calm', recPrice: '305.000₫', recTag: 'Đêm thư giãn' },
+    { key: 'Calm', label: 'Thư giãn', desc: 'Giúp thả lỏng tâm trí và giải tỏa căng thẳng', recProduct: 'Matcha Lavender Calm', recPrice: '395.000₫', recTag: 'Đêm thư giãn' },
     { key: 'Beauty', label: 'Sắc đẹp', desc: 'Nuôi dưỡng làn da căng mướt và chống lão hóa', recProduct: 'Matcha Glow Collagen', recPrice: '349.000₫', recTag: 'Chăm sóc da' },
     { key: 'Immunity', label: 'Miễn dịch', desc: 'Tăng cường sức đề kháng và thanh lọc cơ thể', recProduct: 'Matcha Immune Shield', recPrice: '315.000₫', recTag: 'Đề kháng' },
   ];
