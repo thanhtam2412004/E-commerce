@@ -20,9 +20,13 @@ const catalogAdditions = [
   {
     name: 'Matcha Energy Bites',
     slug: 'matcha-energy-bites',
-    tag: 'Beauty',
+    tag: 'Energy',
     cat: 'Đồ ăn nhẹ lành mạnh',
-    desc: 'Viên ăn nhẹ từ matcha, yến mạch, hạnh nhân và chà là ngọt tự nhiên.',
+    desc: 'Bộ đồ ăn nhẹ từ matcha nguyên chất, hạt và trái cây tự nhiên — thơm ngon, giàu chất xơ, tiếp thêm năng lượng lành mạnh mỗi ngày.',
+    longDesc: 'Khám phá bộ sưu tập đồ ăn nhẹ matcha gồm bánh quy, thanh năng lượng, viên protein, granola, cụm hạnh nhân và trái cây sấy phủ matcha. Mỗi món được làm từ nguyên liệu có nguồn gốc thực vật, không chất bảo quản nhân tạo, cân bằng giữa vị matcha thanh dịu và độ ngọt tự nhiên.',
+    features: ['Matcha nguyên chất, giàu chất chống oxy hoá', 'Nguyên liệu có nguồn gốc thực vật', 'Không màu nhân tạo và không chất bảo quản', 'Giàu chất xơ, hỗ trợ năng lượng và sự tập trung'],
+    variants: ['Bánh quy Matcha', 'Thanh năng lượng Matcha', 'Bánh protein Matcha', 'Granola Matcha', 'Cụm hạnh nhân Matcha', 'Trái cây sấy phủ Matcha'],
+    images: ['/images/matcha-energy-bites.jpg', '/images/matcha-energy-bites-varieties.jpg'],
     price: 125000,
     rawPrice: 125000,
     stock: 45,
@@ -179,6 +183,19 @@ export async function GET(request) {
     await Product.updateOne(
       { slug: 'green-atelier-premium-gift-box' },
       { $set: { images: ['/images/green-atelier-premium-gift-box.jpg', '/images/functional-matcha-collection.jpg'] } }
+    );
+    await Product.updateOne(
+      { slug: 'matcha-energy-bites' },
+      {
+        $set: {
+          tag: 'Energy',
+          desc: 'Bộ đồ ăn nhẹ từ matcha nguyên chất, hạt và trái cây tự nhiên — thơm ngon, giàu chất xơ, tiếp thêm năng lượng lành mạnh mỗi ngày.',
+          longDesc: 'Khám phá bộ sưu tập đồ ăn nhẹ matcha gồm bánh quy, thanh năng lượng, viên protein, granola, cụm hạnh nhân và trái cây sấy phủ matcha. Mỗi món được làm từ nguyên liệu có nguồn gốc thực vật, không chất bảo quản nhân tạo, cân bằng giữa vị matcha thanh dịu và độ ngọt tự nhiên.',
+          features: ['Matcha nguyên chất, giàu chất chống oxy hoá', 'Nguyên liệu có nguồn gốc thực vật', 'Không màu nhân tạo và không chất bảo quản', 'Giàu chất xơ, hỗ trợ năng lượng và sự tập trung'],
+          variants: ['Bánh quy Matcha', 'Thanh năng lượng Matcha', 'Bánh protein Matcha', 'Granola Matcha', 'Cụm hạnh nhân Matcha', 'Trái cây sấy phủ Matcha'],
+          images: ['/images/matcha-energy-bites.jpg', '/images/matcha-energy-bites-varieties.jpg'],
+        },
+      }
     );
 
     const skip  = (page - 1) * limit;
