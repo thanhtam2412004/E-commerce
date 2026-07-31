@@ -5,10 +5,10 @@ import Product from '@/models/Product';
 import Blog from '@/models/Blog';
 
 const seedCategories = [
-  { name: 'Focus', slug: 'focus', desc: 'Sản phẩm hỗ trợ tập trung và làm việc hiệu quả', count: 3 },
-  { name: 'Energy', slug: 'energy', desc: 'Sản phẩm tăng cường năng lượng và sức bền', count: 2 },
+  { name: 'Focus', slug: 'focus', desc: 'Sản phẩm hỗ trợ tập trung và làm việc hiệu quả', count: 4 },
+  { name: 'Energy', slug: 'energy', desc: 'Sản phẩm tăng cường năng lượng và sức bền', count: 3 },
   { name: 'Calm', slug: 'calm', desc: 'Sản phẩm thư giãn và cân bằng tâm trí', count: 1 },
-  { name: 'Beauty', slug: 'beauty', desc: 'Sản phẩm chăm sóc sắc đẹp và làn da', count: 2 },
+  { name: 'Beauty', slug: 'beauty', desc: 'Sản phẩm chăm sóc sắc đẹp và làn da', count: 3 },
   { name: 'Immunity', slug: 'immunity', desc: 'Sản phẩm tăng cường hệ miễn dịch', count: 1 },
 ];
 
@@ -21,6 +21,9 @@ const seedProducts = [
   { name: 'Matcha Zen Morning', slug: 'matcha-zen-morning', tag: 'Focus', cat: 'Ceremonial Grade', desc: 'Dòng nhẹ nhàng cho người mới bắt đầu uống matcha.', price: 265000, rawPrice: 265000, stock: 55, grad: 'linear-gradient(150deg,#DCE6C8,#B9C9A6)', isFeatured: true },
   { name: 'Matcha Citrus Spark', slug: 'matcha-citrus-spark', tag: 'Energy', cat: 'Đặc tuyển', desc: 'Hương cam quýt tươi mát, đánh thức năng lượng.', price: 298000, rawPrice: 298000, stock: 18, grad: 'linear-gradient(150deg,#F3E3C2,#D9AE6C)', isFeatured: false },
   { name: 'Matcha Rose Radiance', slug: 'matcha-rose-radiance', tag: 'Beauty', cat: 'Chăm sóc da', desc: 'Chiết xuất hoa hồng — nuôi dưỡng làn da từ bên trong.', price: 339000, rawPrice: 339000, stock: 22, grad: 'linear-gradient(150deg,#F0D8DC,#E0AEB6)', isFeatured: false },
+  { name: 'Matcha Fresh Latte', slug: 'matcha-fresh-latte', tag: 'Energy', cat: 'Đồ uống pha sẵn', desc: 'Matcha latte đóng chai mịn màng, thanh mát — sẵn sàng thưởng thức mọi lúc.', price: 69000, rawPrice: 69000, stock: 60, grad: 'linear-gradient(150deg,#DCE8D2,#A8C49A)', isFeatured: false },
+  { name: 'Matcha Energy Bites', slug: 'matcha-energy-bites', tag: 'Beauty', cat: 'Đồ ăn nhẹ lành mạnh', desc: 'Viên ăn nhẹ từ matcha, yến mạch, hạnh nhân và chà là ngọt tự nhiên.', price: 125000, rawPrice: 125000, stock: 45, grad: 'linear-gradient(150deg,#E8DFC8,#C9AD75)', isFeatured: false },
+  { name: 'Green Atelier Premium Gift Box', slug: 'green-atelier-premium-gift-box', tag: 'Focus', cat: 'Hộp quà cao cấp', desc: 'Hộp quà matcha sang trọng gồm trà tuyển chọn và phụ kiện pha chế thủ công.', price: 689000, rawPrice: 689000, stock: 15, grad: 'linear-gradient(150deg,#E7DCC5,#B98B3E)', isFeatured: true },
 ];
 
 const seedBlogs = [
