@@ -1,5 +1,6 @@
 import dbConnect from '@/lib/mongodb';
 import Product from '@/models/Product';
+import { mockProducts } from '@/data/mockData';
 
 export const dynamic = 'force-dynamic';
 
@@ -42,6 +43,60 @@ const catalogAdditions = [
   },
 ];
 
+function getFallbackProducts({ q, tag, minPrice, maxPrice, sort, featured, page, limit }) {
+  const tags = tag.split(',').map((value) => value.trim()).filter(Boolean);
+  let products = mockProducts.map((product, index) => ({
+    ...product,
+    _id: product.id,
+    stock: 99,
+    isFeatured: index < 4 || product.id === '11',
+  }));
+
+  if (q) {
+    const normalizedQuery = q.toLocaleLowerCase('vi');
+    products = products.filter((product) =>
+      product.name.toLocaleLowerCase('vi').includes(normalizedQuery)
+    );
+  }
+  if (tags.length) {
+    products = products.filter((product) => tags.includes(product.tag));
+  }
+  if (minPrice > 0) {
+    products = products.filter((product) => product.rawPrice >= minPrice);
+  }
+  if (maxPrice > 0) {
+    products = products.filter((product) => product.rawPrice <= maxPrice);
+  }
+  if (featured) {
+    products = products.filter((product) => product.isFeatured);
+  }
+
+  if (sort === 'price_asc') {
+    products.sort((a, b) => a.rawPrice - b.rawPrice);
+  } else if (sort === 'price_desc') {
+    products.sort((a, b) => b.rawPrice - a.rawPrice);
+  } else if (sort === 'featured') {
+    products.sort((a, b) => Number(b.isFeatured) - Number(a.isFeatured));
+  } else {
+    products.reverse();
+  }
+
+  const total = products.length;
+  const skip = (page - 1) * limit;
+
+  return {
+    success: true,
+    data: products.slice(skip, skip + limit),
+    pagination: {
+      total,
+      page,
+      limit,
+      totalPages: Math.max(1, Math.ceil(total / limit)),
+    },
+    source: 'fallback',
+  };
+}
+
 /**
  * GET /api/products
  *
@@ -56,11 +111,6 @@ const catalogAdditions = [
  *   featured - "true" → chỉ lấy sản phẩm nổi bật
  */
 export async function GET(request) {
-  const conn = await dbConnect();
-  if (!conn) {
-    return Response.json({ success: false, error: 'Không thể kết nối cơ sở dữ liệu.' }, { status: 503 });
-  }
-
   const { searchParams } = new URL(request.url);
 
   const q        = searchParams.get('q')?.trim()        || '';
@@ -71,6 +121,12 @@ export async function GET(request) {
   const featured = searchParams.get('featured')         === 'true';
   const page     = Math.max(1, Number(searchParams.get('page'))  || 1);
   const limit    = Math.min(48, Math.max(1, Number(searchParams.get('limit')) || 12));
+  const queryOptions = { q, tag, minPrice, maxPrice, sort, featured, page, limit };
+
+  const conn = await dbConnect();
+  if (!conn) {
+    return Response.json(getFallbackProducts(queryOptions));
+  }
 
   // ── Build filter ──────────────────────────────────────────────────────────
   const filter = {};
