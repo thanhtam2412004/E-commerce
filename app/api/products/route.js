@@ -198,7 +198,7 @@ export async function GET(request) {
     );
     await Product.updateOne(
       { slug: 'matcha-immune-shield' },
-      { $set: { images: ['/images/matcha-immune-shield.png'] } }
+      { $set: { images: ['/images/matcha-immune-shield.png', '/images/matcha-immune-shield-detail.png'] } }
     );
     await Product.updateOne(
       { slug: 'matcha-rose-radiance' },
