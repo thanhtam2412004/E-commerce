@@ -14,20 +14,25 @@ export default function ProductDetailPage({ params }) {
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [selectedVariant, setSelectedVariant] = useState(0);
   const addItem = useCartStore((s) => s.addItem);
 
   const { id } = use(params);
   const product = mockProducts.find((p) => p.id === id) || mockProducts[0];
   const relatedProducts = mockProducts.filter((p) => p.id !== product.id).slice(0, 4);
+  const selectedVariantName = product.variants?.[selectedVariant];
+  const cartProduct = selectedVariantName
+    ? { ...product, id: `${product.id}-variant-${selectedVariant}`, name: `${product.name} — ${selectedVariantName}` }
+    : product;
 
   const handleAddToCart = () => {
-    addItem(product, qty);
+    addItem(cartProduct, qty);
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   };
 
   const handleBuyNow = () => {
-    addItem(product, qty);
+    addItem(cartProduct, qty);
     router.push('/cart');
   };
 
@@ -91,16 +96,37 @@ export default function ProductDetailPage({ params }) {
                   </div>
                   <div className="pd-price">{product.price}</div>
                   <p className="pd-desc">
-                    {product.desc} Thu hoạch vụ xuân đầu tiên tại cao nguyên Mộc Châu, xay mịn bằng cối đá thủ công để giữ được sắc xanh ngọc bảo và hàm lượng L-theanine cao nhất.
+                    {product.longDesc || `${product.desc} Thu hoạch vụ xuân đầu tiên tại cao nguyên Mộc Châu, xay mịn bằng cối đá thủ công để giữ được sắc xanh ngọc bảo và hàm lượng L-theanine cao nhất.`}
                   </p>
+
+                  {product.variants?.length > 0 && (
+                    <div className="pd-block">
+                      <h4>Phân loại</h4>
+                      <div className="variant-grid">
+                        {product.variants.map((variant, index) => (
+                          <button
+                            key={variant}
+                            type="button"
+                            className={`variant-option${selectedVariant === index ? ' active' : ''}`}
+                            onClick={() => setSelectedVariant(index)}
+                            aria-pressed={selectedVariant === index}
+                          >
+                            {variant}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
                   <div className="pd-block">
                     <h4>Đặc điểm nổi bật</h4>
                     <ul>
-                      <li>100% Matcha hữu cơ Mộc Châu</li>
-                      <li>Hàm lượng L-theanine hỗ trợ tập trung 4-6 tiếng</li>
-                      <li>Không gây ép tim hay bồn chồn</li>
-                      <li>Bảo quản trong hũ thủy tinh sẫm màu chống tia UV</li>
+                      {(product.features || [
+                        '100% Matcha hữu cơ Mộc Châu',
+                        'Hàm lượng L-theanine hỗ trợ tập trung 4-6 tiếng',
+                        'Không gây ép tim hay bồn chồn',
+                        'Bảo quản trong hũ thủy tinh sẫm màu chống tia UV',
+                      ]).map((feature) => <li key={feature}>{feature}</li>)}
                     </ul>
                   </div>
 
