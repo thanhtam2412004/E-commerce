@@ -209,7 +209,7 @@ export async function GET(request) {
     );
     await Product.updateOne(
       { slug: 'matcha-moc-chau-co-dien' },
-      { $set: { images: ['/images/matcha-moc-chau-co-dien.jpg'] } }
+      { $set: { images: ['/images/matcha-moc-chau-co-dien.png'] } }
     );
     await Product.updateOne(
       { slug: 'matcha-glow-collagen' },
