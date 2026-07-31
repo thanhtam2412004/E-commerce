@@ -7,7 +7,10 @@ import BlogCard from '@/components/BlogCard';
 import { mockProducts, mockBlogs } from '@/data/mockData';
 
 export default function HomePage() {
-  const featuredProducts = mockProducts.slice(0, 4);
+  const featuredProducts = [
+    ...mockProducts.slice(0, 4),
+    ...mockProducts.slice(-3),
+  ];
   const latestBlogs = mockBlogs.slice(0, 3);
 
   return (
