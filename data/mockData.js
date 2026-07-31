@@ -7,6 +7,9 @@ export const mockProducts = [
   { id: '6', tag: 'Focus', grad: 'linear-gradient(150deg,#DCE6C8,#B9C9A6)', cat: 'Ceremonial Grade', name: 'Matcha Zen Morning', desc: 'Dòng nhẹ nhàng cho người mới bắt đầu uống matcha.', price: '265.000₫', rawPrice: 265000 },
   { id: '7', tag: 'Energy', grad: 'linear-gradient(150deg,#F3E3C2,#D9AE6C)', cat: 'Đặc tuyển', name: 'Matcha Citrus Spark', desc: 'Hương cam quýt tươi mát, đánh thức năng lượng.', price: '298.000₫', rawPrice: 298000 },
   { id: '8', tag: 'Beauty', grad: 'linear-gradient(150deg,#F0D8DC,#E0AEB6)', cat: 'Chăm sóc da', name: 'Matcha Rose Radiance', desc: 'Chiết xuất hoa hồng — nuôi dưỡng làn da từ bên trong.', price: '339.000₫', rawPrice: 339000 },
+  { id: '9', tag: 'Energy', grad: 'linear-gradient(150deg,#DCE8D2,#A8C49A)', cat: 'Đồ uống pha sẵn', name: 'Matcha Fresh Latte', desc: 'Matcha latte đóng chai mịn màng, thanh mát — sẵn sàng thưởng thức mọi lúc.', price: '69.000₫', rawPrice: 69000 },
+  { id: '10', tag: 'Beauty', grad: 'linear-gradient(150deg,#E8DFC8,#C9AD75)', cat: 'Đồ ăn nhẹ lành mạnh', name: 'Matcha Energy Bites', desc: 'Viên ăn nhẹ từ matcha, yến mạch, hạnh nhân và chà là ngọt tự nhiên.', price: '125.000₫', rawPrice: 125000 },
+  { id: '11', tag: 'Focus', grad: 'linear-gradient(150deg,#E7DCC5,#B98B3E)', cat: 'Hộp quà cao cấp', name: 'Green Atelier Premium Gift Box', desc: 'Hộp quà matcha sang trọng gồm trà tuyển chọn và phụ kiện pha chế thủ công.', price: '689.000₫', rawPrice: 689000 },
 ];
 
 export const mockBlogs = [
@@ -19,10 +22,10 @@ export const mockBlogs = [
 ];
 
 export const mockCategories = [
-  { name: 'Focus', desc: 'Sản phẩm hỗ trợ tập trung', count: 3 },
-  { name: 'Energy', desc: 'Sản phẩm tăng năng lượng', count: 2 },
+  { name: 'Focus', desc: 'Sản phẩm hỗ trợ tập trung', count: 4 },
+  { name: 'Energy', desc: 'Sản phẩm tăng năng lượng', count: 3 },
   { name: 'Calm', desc: 'Sản phẩm giúp thư giãn', count: 1 },
-  { name: 'Beauty', desc: 'Sản phẩm chăm sóc sắc đẹp', count: 2 },
+  { name: 'Beauty', desc: 'Sản phẩm chăm sóc sắc đẹp', count: 3 },
   { name: 'Immunity', desc: 'Sản phẩm tăng đề kháng', count: 1 },
 ];
 
