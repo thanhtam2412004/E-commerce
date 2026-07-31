@@ -209,6 +209,10 @@ export async function GET(request) {
       { $set: { images: ['/images/matcha-citrus-spark.png'] } }
     );
     await Product.updateOne(
+      { slug: 'matcha-zen-morning' },
+      { $set: { images: ['/images/matcha-zen-morning.png'] } }
+    );
+    await Product.updateOne(
       { slug: 'matcha-energy-bites' },
       {
         $set: {
