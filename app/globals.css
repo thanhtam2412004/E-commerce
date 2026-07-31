@@ -83,6 +83,8 @@ section.inner{padding:56px 0 90px;}
 .prod-body{padding:16px 16px 18px;}
 .cat-label{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em;}
 .prod-body h3{font-size:17px;margin:6px 0;font-weight:500;}
+.card-variant-select{width:100%;padding:9px 34px 9px 11px;border:1.5px solid var(--line);border-radius:9px;background:#fff;color:#3f4d3d;font-size:12px;font-weight:700;cursor:pointer;outline:none;}
+.card-variant-select:hover,.card-variant-select:focus{border-color:var(--matcha);}
 .prod-foot{display:flex;align-items:center;justify-content:space-between;margin-top:10px;}
 .price{font-family:var(--font-serif);font-size:18px;color:var(--forest);}
 .add-btn{width:36px;height:36px;border-radius:50%;background:var(--cream-2);display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s;}
