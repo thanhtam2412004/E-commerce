@@ -15,6 +15,7 @@ const catalogAdditions = [
     rawPrice: 89000,
     stock: 60,
     grad: 'linear-gradient(150deg,#DCE8D2,#A8C49A)',
+    images: ['/images/matcha-fresh-latte.png'],
     isFeatured: false,
   },
   {
@@ -233,6 +234,10 @@ export async function GET(request) {
     await Product.updateOne(
       { slug: 'matcha-zen-morning' },
       { $set: { images: ['/images/matcha-zen-morning.png'] } }
+    );
+    await Product.updateOne(
+      { slug: 'matcha-fresh-latte' },
+      { $set: { images: ['/images/matcha-fresh-latte.png'] } }
     );
     await Product.updateOne(
       { slug: 'matcha-energy-bites' },
