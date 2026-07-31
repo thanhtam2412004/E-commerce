@@ -185,6 +185,18 @@ export async function GET(request) {
       { $set: { images: ['/images/green-atelier-premium-gift-box.jpg', '/images/functional-matcha-collection.jpg'] } }
     );
     await Product.updateOne(
+      { slug: 'matcha-moc-chau-co-dien' },
+      { $set: { images: ['/images/matcha-moc-chau-co-dien.jpg'] } }
+    );
+    await Product.updateOne(
+      { slug: 'matcha-glow-collagen' },
+      { $set: { images: ['/images/matcha-glow-collagen.jpg'] } }
+    );
+    await Product.updateOne(
+      { slug: 'matcha-genki-boost' },
+      { $set: { images: ['/images/matcha-genki-boost.jpg'] } }
+    );
+    await Product.updateOne(
       { slug: 'matcha-energy-bites' },
       {
         $set: {
