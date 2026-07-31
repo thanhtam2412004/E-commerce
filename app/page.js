@@ -44,9 +44,12 @@ export default function HomePage() {
                   <circle cx="210" cy="210" fill="none" r="160" stroke="#6B8E4E" strokeDasharray="1 8" strokeWidth="1.6"></circle>
                   <circle cx="210" cy="210" fill="none" r="130" stroke="#B98B3E" strokeDasharray="3 6" strokeWidth="1.2"></circle>
                   <circle cx="210" cy="210" fill="#26402A" r="98"></circle>
-                  <path d="M150 235 Q210 150 270 235" fill="none" opacity=".8" stroke="#8FAE6C" strokeLinecap="round" strokeWidth="3"></path>
-                  <path d="M160 250 Q210 185 260 250" fill="none" opacity=".8" stroke="#D9AE6C" strokeLinecap="round" strokeWidth="3"></path>
-                  <circle cx="210" cy="210" fill="#F1F3E8" r="6"></circle>
+                  <path d="M176 265 C188 239 202 215 221 194 C234 180 246 166 252 151" fill="none" stroke="#D9AE6C" strokeLinecap="round" strokeWidth="4"></path>
+                  <path d="M204 218 C181 214 165 199 163 178 C184 176 202 187 210 205 C210 210 208 215 204 218Z" fill="#8FAE6C"></path>
+                  <path d="M221 195 C221 171 234 151 254 142 C260 162 252 184 233 197 C228 199 224 198 221 195Z" fill="#A9C482"></path>
+                  <path d="M190 239 C169 239 152 228 146 210 C164 204 184 211 196 226 C198 231 196 236 190 239Z" fill="#6B8E4E"></path>
+                  <path d="M232 183 C251 180 269 188 279 204 C264 216 242 217 225 206 C221 201 224 190 232 183Z" fill="#8FAE6C"></path>
+                  <path d="M205 217 C192 204 179 193 164 180 M222 194 C234 177 244 159 253 143 M190 238 C177 225 163 216 147 210 M231 184 C245 195 261 201 278 204" fill="none" opacity=".65" stroke="#F1F3E8" strokeLinecap="round" strokeWidth="1.5"></path>
                 </svg>
               </div>
             </div>
