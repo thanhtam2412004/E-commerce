@@ -44,8 +44,8 @@ export default function AboutPage() {
                 <Image
                   src="/images/hand-stone-ground-matcha.png"
                   alt="Nghệ nhân xay matcha thủ công bằng cối đá granit"
-                  width={1400}
-                  height={1090}
+                  width={1402}
+                  height={1122}
                   sizes="(max-width: 768px) 100vw, 50vw"
                   style={{
                     width: '100%',
