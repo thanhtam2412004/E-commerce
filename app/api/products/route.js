@@ -3,6 +3,45 @@ import Product from '@/models/Product';
 
 export const dynamic = 'force-dynamic';
 
+const catalogAdditions = [
+  {
+    name: 'Matcha Fresh Latte',
+    slug: 'matcha-fresh-latte',
+    tag: 'Energy',
+    cat: 'Đồ uống pha sẵn',
+    desc: 'Matcha latte đóng chai mịn màng, thanh mát — sẵn sàng thưởng thức mọi lúc.',
+    price: 69000,
+    rawPrice: 69000,
+    stock: 60,
+    grad: 'linear-gradient(150deg,#DCE8D2,#A8C49A)',
+    isFeatured: false,
+  },
+  {
+    name: 'Matcha Energy Bites',
+    slug: 'matcha-energy-bites',
+    tag: 'Beauty',
+    cat: 'Đồ ăn nhẹ lành mạnh',
+    desc: 'Viên ăn nhẹ từ matcha, yến mạch, hạnh nhân và chà là ngọt tự nhiên.',
+    price: 125000,
+    rawPrice: 125000,
+    stock: 45,
+    grad: 'linear-gradient(150deg,#E8DFC8,#C9AD75)',
+    isFeatured: false,
+  },
+  {
+    name: 'Green Atelier Premium Gift Box',
+    slug: 'green-atelier-premium-gift-box',
+    tag: 'Focus',
+    cat: 'Hộp quà cao cấp',
+    desc: 'Hộp quà matcha sang trọng gồm trà tuyển chọn và phụ kiện pha chế thủ công.',
+    price: 689000,
+    rawPrice: 689000,
+    stock: 15,
+    grad: 'linear-gradient(150deg,#E7DCC5,#B98B3E)',
+    isFeatured: true,
+  },
+];
+
 /**
  * GET /api/products
  *
@@ -71,6 +110,16 @@ export async function GET(request) {
 
   // ── Query ────────────────────────────────────────────────────────────────
   try {
+    await Product.bulkWrite(
+      catalogAdditions.map((product) => ({
+        updateOne: {
+          filter: { slug: product.slug },
+          update: { $setOnInsert: product },
+          upsert: true,
+        },
+      }))
+    );
+
     const skip  = (page - 1) * limit;
     const total = await Product.countDocuments(filter);
     const products = await Product.find(filter)
