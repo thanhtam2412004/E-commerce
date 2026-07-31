@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -40,7 +41,19 @@ export default function AboutPage() {
                   <h2>Xay mịn thủ công bằng cối đá</h2>
                   <p>Mỗi giờ nghiền cối đá granit truyền thống chỉ tạo ra đúng 30g bột matcha siêu mịn. Tốc độ chậm giúp giữ nhiệt độ không vượt quá 40°C, giữ trọn hàm lượng L-theanine và sắc xanh ngọc bảo quý giá.</p>
                 </div>
-                <div className="story-photo" style={{ background: 'linear-gradient(150deg,#F3E3C2,#D9AE6C)' }}></div>
+                <Image
+                  src="/images/hand-stone-ground-matcha.png"
+                  alt="Nghệ nhân xay matcha thủ công bằng cối đá granit"
+                  width={1400}
+                  height={1090}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    borderRadius: '20px',
+                    display: 'block',
+                  }}
+                />
               </div>
 
               <div className="page-head" style={{ textAlign: 'center', marginTop: '60px' }}>
