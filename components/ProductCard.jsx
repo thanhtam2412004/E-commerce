@@ -9,11 +9,20 @@ export default function ProductCard({ product }) {
   const router = useRouter();
   const addItem = useCartStore((s) => s.addItem);
   const [added, setAdded] = useState(false);
+  const [selectedVariant, setSelectedVariant] = useState(0);
 
   const handleAddToCart = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    addItem(product, 1);
+    const variantName = product.variants?.[selectedVariant];
+    const cartProduct = variantName
+      ? {
+          ...product,
+          id: `${product.id}-variant-${selectedVariant}`,
+          name: `${product.name} — ${variantName}`,
+        }
+      : product;
+    addItem(cartProduct, 1);
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
   };
@@ -40,6 +49,22 @@ export default function ProductCard({ product }) {
         <div className="cat-label">{product.cat}</div>
         <h3>{product.name}</h3>
         <p style={{ fontSize: '12.5px', color: '#5b6b57', marginBottom: '10px' }}>{product.desc}</p>
+        {product.variants?.length > 0 && (
+          <select
+            className="card-variant-select"
+            value={selectedVariant}
+            onClick={(e) => e.stopPropagation()}
+            onChange={(e) => {
+              e.stopPropagation();
+              setSelectedVariant(Number(e.target.value));
+            }}
+            aria-label={`Chọn phân loại ${product.name}`}
+          >
+            {product.variants.map((variant, index) => (
+              <option key={variant} value={index}>{variant}</option>
+            ))}
+          </select>
+        )}
         <div className="prod-foot">
           <span className="price">{product.price}</span>
           <button
