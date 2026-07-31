@@ -26,6 +26,28 @@ const seedProducts = [
   { name: 'Green Atelier Premium Gift Box', slug: 'green-atelier-premium-gift-box', tag: 'Focus', cat: 'Hộp quà cao cấp', desc: 'Hộp quà matcha sang trọng gồm trà tuyển chọn và phụ kiện pha chế thủ công.', price: 689000, rawPrice: 689000, stock: 15, grad: 'linear-gradient(150deg,#E7DCC5,#B98B3E)', images: ['/images/green-atelier-premium-gift-box.jpg', '/images/functional-matcha-collection.jpg'], isFeatured: true },
 ];
 
+const premiumPrices = {
+  'matcha-moc-chau-co-dien': 365000,
+  'matcha-genki-boost': 425000,
+  'matcha-lavender-calm': 395000,
+  'matcha-glow-collagen': 449000,
+  'matcha-immune-shield': 415000,
+  'matcha-zen-morning': 325000,
+  'matcha-citrus-spark': 379000,
+  'matcha-rose-radiance': 429000,
+  'matcha-fresh-latte': 89000,
+  'matcha-energy-bites': 169000,
+  'green-atelier-premium-gift-box': 1290000,
+};
+
+seedProducts.forEach((product) => {
+  const premiumPrice = premiumPrices[product.slug];
+  if (premiumPrice) {
+    product.price = premiumPrice;
+    product.rawPrice = premiumPrice;
+  }
+});
+
 const seedBlogs = [
   { title: 'Vì sao Matcha Mộc Châu khác biệt so với matcha Nhật Bản?', slug: 'matcha-moc-chau-vs-nhat-ban', desc: 'Khám phá thổ nhưỡng và quy trình xay đá truyền thống.', content: 'Matcha từ lâu đã trở thành một phần không thể thiếu trong văn hóa trà đạo và phong cách sống hiện đại...', date: '18 Th7, 2026', grad: 'linear-gradient(160deg,#DCE6C8,#8FAE6C)', status: 'published' },
   { title: 'Nghi thức pha matcha buổi sáng giúp bạn tập trung cả ngày', slug: 'nghi-thuc-pha-matcha-buoi-sang', desc: 'Ba bước đơn giản với chasen và chawan.', content: 'Pha một tách matcha không chỉ là việc hoà tan bột trà mà còn là một nghi thức chánh niệm...', date: '10 Th7, 2026', grad: 'linear-gradient(160deg,#F3E3C2,#D9AE6C)', status: 'published' },
