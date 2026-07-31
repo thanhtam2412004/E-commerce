@@ -39,6 +39,7 @@ const catalogAdditions = [
     rawPrice: 689000,
     stock: 15,
     grad: 'linear-gradient(150deg,#E7DCC5,#B98B3E)',
+    images: ['/images/green-atelier-premium-gift-box.jpg', '/images/functional-matcha-collection.jpg'],
     isFeatured: true,
   },
 ];
@@ -174,6 +175,10 @@ export async function GET(request) {
           upsert: true,
         },
       }))
+    );
+    await Product.updateOne(
+      { slug: 'green-atelier-premium-gift-box' },
+      { $set: { images: ['/images/green-atelier-premium-gift-box.jpg', '/images/functional-matcha-collection.jpg'] } }
     );
 
     const skip  = (page - 1) * limit;
