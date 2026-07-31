@@ -55,7 +55,7 @@ export default function BlogDetailPage({ params }) {
                 <p>Matcha từ lâu đã trở thành một phần không thể thiếu trong văn hóa trà đạo và phong cách sống hiện đại. Tuy nhiên, nguồn gốc thổ dưỡng của búp trà lại đóng vai trò quyết định đến hàm lượng chất chống oxy hóa EGCG và vị umami tự nhiên.</p>
 
                 <blockquote>
-                  "Một tách matcha chuẩn vị không chỉ đánh thức giác quan mà còn mang lại sự tĩnh lặng sâu thẳm trong tâm trí."
+                  &ldquo;Một tách matcha chuẩn vị không chỉ đánh thức giác quan mà còn mang lại sự tĩnh lặng sâu thẳm trong tâm trí.&rdquo;
                 </blockquote>
 
                 <p>Tại vùng cao nguyên Mộc Châu với độ cao hơn 1.050m so với mực nước biển, sương mù bao phủ quanh năm cùng chất đất đỏ bazán màu mỡ đã tạo nên những búp trà xanh mướt, giàu diệp tính. Quy trình che phủ nắng 21 ngày trước khi thu hoạch giúp tích tụ hàm lượng L-theanine tối đa.</p>
