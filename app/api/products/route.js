@@ -11,8 +11,8 @@ const catalogAdditions = [
     tag: 'Energy',
     cat: 'Đồ uống pha sẵn',
     desc: 'Matcha latte đóng chai mịn màng, thanh mát — sẵn sàng thưởng thức mọi lúc.',
-    price: 69000,
-    rawPrice: 69000,
+    price: 89000,
+    rawPrice: 89000,
     stock: 60,
     grad: 'linear-gradient(150deg,#DCE8D2,#A8C49A)',
     isFeatured: false,
@@ -27,8 +27,8 @@ const catalogAdditions = [
     features: ['Matcha nguyên chất, giàu chất chống oxy hoá', 'Nguyên liệu có nguồn gốc thực vật', 'Không màu nhân tạo và không chất bảo quản', 'Giàu chất xơ, hỗ trợ năng lượng và sự tập trung'],
     variants: ['Bánh quy Matcha', 'Thanh năng lượng Matcha', 'Bánh protein Matcha', 'Granola Matcha', 'Cụm hạnh nhân Matcha', 'Trái cây sấy phủ Matcha'],
     images: ['/images/matcha-energy-bites.jpg', '/images/matcha-energy-bites-varieties.jpg'],
-    price: 125000,
-    rawPrice: 125000,
+    price: 169000,
+    rawPrice: 169000,
     stock: 45,
     grad: 'linear-gradient(150deg,#E8DFC8,#C9AD75)',
     isFeatured: false,
@@ -39,14 +39,28 @@ const catalogAdditions = [
     tag: 'Focus',
     cat: 'Hộp quà cao cấp',
     desc: 'Hộp quà matcha sang trọng gồm trà tuyển chọn và phụ kiện pha chế thủ công.',
-    price: 689000,
-    rawPrice: 689000,
+    price: 1290000,
+    rawPrice: 1290000,
     stock: 15,
     grad: 'linear-gradient(150deg,#E7DCC5,#B98B3E)',
     images: ['/images/green-atelier-premium-gift-box.jpg', '/images/functional-matcha-collection.jpg'],
     isFeatured: true,
   },
 ];
+
+const premiumPrices = {
+  'matcha-moc-chau-co-dien': 365000,
+  'matcha-genki-boost': 425000,
+  'matcha-lavender-calm': 395000,
+  'matcha-glow-collagen': 449000,
+  'matcha-immune-shield': 415000,
+  'matcha-zen-morning': 325000,
+  'matcha-citrus-spark': 379000,
+  'matcha-rose-radiance': 429000,
+  'matcha-fresh-latte': 89000,
+  'matcha-energy-bites': 169000,
+  'green-atelier-premium-gift-box': 1290000,
+};
 
 function getFallbackProducts({ q, tag, minPrice, maxPrice, sort, featured, page, limit }) {
   const tags = tag.split(',').map((value) => value.trim()).filter(Boolean);
@@ -177,6 +191,14 @@ export async function GET(request) {
           filter: { slug: product.slug },
           update: { $setOnInsert: product },
           upsert: true,
+        },
+      }))
+    );
+    await Product.bulkWrite(
+      Object.entries(premiumPrices).map(([slug, price]) => ({
+        updateOne: {
+          filter: { slug },
+          update: { $set: { price, rawPrice: price } },
         },
       }))
     );
