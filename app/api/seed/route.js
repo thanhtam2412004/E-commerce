@@ -23,7 +23,7 @@ const seedProducts = [
   { name: 'Matcha Rose Radiance', slug: 'matcha-rose-radiance', tag: 'Beauty', cat: 'Chăm sóc da', desc: 'Chiết xuất hoa hồng — nuôi dưỡng làn da từ bên trong.', price: 339000, rawPrice: 339000, stock: 22, grad: 'linear-gradient(150deg,#F0D8DC,#E0AEB6)', isFeatured: false },
   { name: 'Matcha Fresh Latte', slug: 'matcha-fresh-latte', tag: 'Energy', cat: 'Đồ uống pha sẵn', desc: 'Matcha latte đóng chai mịn màng, thanh mát — sẵn sàng thưởng thức mọi lúc.', price: 69000, rawPrice: 69000, stock: 60, grad: 'linear-gradient(150deg,#DCE8D2,#A8C49A)', isFeatured: false },
   { name: 'Matcha Energy Bites', slug: 'matcha-energy-bites', tag: 'Beauty', cat: 'Đồ ăn nhẹ lành mạnh', desc: 'Viên ăn nhẹ từ matcha, yến mạch, hạnh nhân và chà là ngọt tự nhiên.', price: 125000, rawPrice: 125000, stock: 45, grad: 'linear-gradient(150deg,#E8DFC8,#C9AD75)', isFeatured: false },
-  { name: 'Green Atelier Premium Gift Box', slug: 'green-atelier-premium-gift-box', tag: 'Focus', cat: 'Hộp quà cao cấp', desc: 'Hộp quà matcha sang trọng gồm trà tuyển chọn và phụ kiện pha chế thủ công.', price: 689000, rawPrice: 689000, stock: 15, grad: 'linear-gradient(150deg,#E7DCC5,#B98B3E)', isFeatured: true },
+  { name: 'Green Atelier Premium Gift Box', slug: 'green-atelier-premium-gift-box', tag: 'Focus', cat: 'Hộp quà cao cấp', desc: 'Hộp quà matcha sang trọng gồm trà tuyển chọn và phụ kiện pha chế thủ công.', price: 689000, rawPrice: 689000, stock: 15, grad: 'linear-gradient(150deg,#E7DCC5,#B98B3E)', images: ['/images/green-atelier-premium-gift-box.jpg', '/images/functional-matcha-collection.jpg'], isFeatured: true },
 ];
 
 const seedBlogs = [
