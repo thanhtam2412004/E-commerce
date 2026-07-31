@@ -27,6 +27,18 @@ const ProductSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
+    longDesc: {
+      type: String,
+      default: '',
+    },
+    features: {
+      type: [String],
+      default: [],
+    },
+    variants: {
+      type: [String],
+      default: [],
+    },
     price: {
       type: Number,
       required: true,
