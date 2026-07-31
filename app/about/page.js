@@ -27,7 +27,19 @@ export default function AboutPage() {
               </div>
 
               <div className="story-block">
-                <div className="story-photo"></div>
+                <Image
+                  src="/images/moc-chau-tea-highlands.png"
+                  alt="Đồi trà xanh trên cao nguyên Mộc Châu trong sương sớm"
+                  width={1402}
+                  height={1122}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    borderRadius: '20px',
+                    display: 'block',
+                  }}
+                />
                 <div>
                   <div className="eyebrow">Nguồn gốc nguyên bản</div>
                   <h2>Thổ nhưỡng & Độ cao lý tưởng</h2>
