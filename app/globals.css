@@ -96,9 +96,9 @@ section.inner{padding:56px 0 90px;}
 .pd-gallery-main{height:400px;border-radius:20px;display:flex;align-items:center;justify-content:center;background:linear-gradient(150deg,#DCE6C8,#B9C9A6);margin-bottom:14px;position:relative;overflow:hidden;}
 .pd-product-image{object-fit:cover;}
 .pd-thumbs{display:flex;gap:10px;}
-.pd-thumbs div{width:64px;height:64px;border-radius:12px;background:linear-gradient(150deg,#DCE6C8,#B9C9A6);border:2px solid transparent;cursor:pointer;}
-.pd-thumbs div.active{border-color:var(--gold);}
-.pd-thumbs .pd-thumb{position:relative;overflow:hidden;}
+.pd-thumbs div,.pd-thumbs button{width:64px;height:64px;border-radius:12px;background:linear-gradient(150deg,#DCE6C8,#B9C9A6);border:2px solid transparent;cursor:pointer;}
+.pd-thumbs .active{border-color:var(--gold);}
+.pd-thumbs .pd-thumb{position:relative;overflow:hidden;flex:0 0 64px;}
 .pd-thumbs .pd-thumb img{object-fit:cover;}
 .rating{display:flex;align-items:center;gap:8px;color:var(--gold);font-size:14px;margin:10px 0 16px;}
 .rating span{color:#5b6b57;font-size:13px;font-weight:600;}
