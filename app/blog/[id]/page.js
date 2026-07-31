@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -30,7 +31,25 @@ export default function BlogDetailPage({ params }) {
                 <div className="article-meta">{blog.date} • Tác giả: Green Atelier Editorial</div>
               </div>
 
-              <div className="article-cover" style={{ background: blog.grad }}></div>
+              <div
+                className="article-cover"
+                style={{
+                  background: blog.grad,
+                  position: 'relative',
+                  overflow: 'hidden',
+                }}
+              >
+                {blog.image && (
+                  <Image
+                    src={blog.image}
+                    alt={blog.title}
+                    fill
+                    priority
+                    sizes="(max-width: 900px) 100vw, 900px"
+                    style={{ objectFit: 'cover' }}
+                  />
+                )}
+              </div>
 
               <div className="article-body">
                 <p>Matcha từ lâu đã trở thành một phần không thể thiếu trong văn hóa trà đạo và phong cách sống hiện đại. Tuy nhiên, nguồn gốc thổ dưỡng của búp trà lại đóng vai trò quyết định đến hàm lượng chất chống oxy hóa EGCG và vị umami tự nhiên.</p>
