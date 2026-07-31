@@ -197,6 +197,14 @@ export async function GET(request) {
       { $set: { images: ['/images/matcha-genki-boost.jpg'] } }
     );
     await Product.updateOne(
+      { slug: 'matcha-immune-shield' },
+      { $set: { images: ['/images/matcha-immune-shield.png'] } }
+    );
+    await Product.updateOne(
+      { slug: 'matcha-rose-radiance' },
+      { $set: { images: ['/images/matcha-rose-radiance.png'] } }
+    );
+    await Product.updateOne(
       { slug: 'matcha-energy-bites' },
       {
         $set: {
