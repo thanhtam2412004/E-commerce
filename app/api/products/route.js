@@ -205,6 +205,10 @@ export async function GET(request) {
       { $set: { images: ['/images/matcha-rose-radiance.png'] } }
     );
     await Product.updateOne(
+      { slug: 'matcha-citrus-spark' },
+      { $set: { images: ['/images/matcha-citrus-spark.png'] } }
+    );
+    await Product.updateOne(
       { slug: 'matcha-energy-bites' },
       {
         $set: {
