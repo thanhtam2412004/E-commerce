@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import useCartStore from '@/store/cartStore';
@@ -21,9 +22,19 @@ export default function ProductCard({ product }) {
     <div className="prod-card" onClick={() => router.push(`/product/${product.id}`)}>
       <div className="prod-photo" style={{ background: product.grad }}>
         <span className="tag">{product.tag}</span>
-        <svg width="60" height="60" viewBox="0 0 40 40" fill="none">
-          <circle cx="20" cy="20" r="16" stroke="#26402A" strokeWidth="1.3" />
-        </svg>
+        {product.images?.[0] ? (
+          <Image
+            src={product.images[0]}
+            alt={product.name}
+            fill
+            sizes="(max-width: 980px) 50vw, 25vw"
+            className="prod-image"
+          />
+        ) : (
+          <svg width="60" height="60" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="16" stroke="#26402A" strokeWidth="1.3" />
+          </svg>
+        )}
       </div>
       <div className="prod-body">
         <div className="cat-label">{product.cat}</div>
