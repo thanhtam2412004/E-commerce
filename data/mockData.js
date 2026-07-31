@@ -13,9 +13,9 @@ export const mockProducts = [
 ];
 
 export const mockBlogs = [
-  { id: '1', date: '18 Th7, 2026', title: 'Vì sao Matcha Mộc Châu khác biệt so với matcha Nhật Bản?', desc: 'Khám phá thổ nhưỡng và quy trình xay đá truyền thống.', grad: 'linear-gradient(160deg,#DCE6C8,#8FAE6C)' },
-  { id: '2', date: '10 Th7, 2026', title: 'Nghi thức pha matcha buổi sáng giúp bạn tập trung cả ngày', desc: 'Ba bước đơn giản với chasen và chawan.', grad: 'linear-gradient(160deg,#F3E3C2,#D9AE6C)' },
-  { id: '3', date: '2 Th7, 2026', title: '5 công dụng của matcha bạn có thể chưa biết', desc: 'Từ Focus đến Immunity — lợi ích khoa học của trà xanh.', grad: 'linear-gradient(160deg,#E4D9E8,#C9B8D6)' },
+  { id: '1', date: '18 Th7, 2026', title: 'Vì sao Matcha Mộc Châu khác biệt so với matcha Nhật Bản?', desc: 'Khám phá thổ nhưỡng và quy trình xay đá truyền thống.', image: '/images/blog/moc-chau-matcha-origin.png', grad: 'linear-gradient(160deg,#DCE6C8,#8FAE6C)' },
+  { id: '2', date: '10 Th7, 2026', title: 'Nghi thức pha matcha buổi sáng giúp bạn tập trung cả ngày', desc: 'Ba bước đơn giản với chasen và chawan.', image: '/images/blog/morning-matcha-ritual.png', grad: 'linear-gradient(160deg,#F3E3C2,#D9AE6C)' },
+  { id: '3', date: '2 Th7, 2026', title: '5 công dụng của matcha bạn có thể chưa biết', desc: 'Từ Focus đến Immunity — lợi ích khoa học của trà xanh.', image: '/images/blog/matcha-wellness-benefits.png', grad: 'linear-gradient(160deg,#E4D9E8,#C9B8D6)' },
   { id: '4', date: '24 Th6, 2026', title: 'Phân biệt Ceremonial Grade và Culinary Grade', desc: 'Loại nào phù hợp để uống, loại nào để làm bánh?', grad: 'linear-gradient(160deg,#D8E8DC,#A8C9B0)' },
   { id: '5', date: '15 Th6, 2026', title: 'Bảo quản matcha đúng cách để giữ trọn hương vị', desc: 'Những sai lầm phổ biến khiến matcha nhanh mất vị.', grad: 'linear-gradient(160deg,#F0D8DC,#E0AEB6)' },
   { id: '6', date: '5 Th6, 2026', title: 'Matcha latte tại nhà: công thức chuẩn quán', desc: 'Tỷ lệ đánh bột và sữa để có lớp bọt mịn hoàn hảo.', grad: 'linear-gradient(160deg,#DCE6C8,#B9C9A6)' },
