@@ -20,8 +20,8 @@ export default function AdminSidebar() {
         <Image
           src="/logo.png"
           alt="Green Atelier"
-          width={32}
-          height={32}
+          width={72}
+          height={48}
           style={{ objectFit: 'contain' }}
         />
         Green Atelier
