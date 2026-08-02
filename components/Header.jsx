@@ -23,8 +23,8 @@ export default function Header() {
           <Image
             src="/logo.png"
             alt="Green Atelier"
-            width={40}
-            height={40}
+            width={90}
+            height={60}
             className="logo-img"
             priority
           />
