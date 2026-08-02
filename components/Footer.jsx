@@ -11,8 +11,8 @@ export default function Footer() {
               <Image
                 src="/logo.png"
                 alt="Green Atelier"
-                width={36}
-                height={36}
+                width={96}
+                height={64}
                 style={{ objectFit: 'contain' }}
               />
               Green Atelier
