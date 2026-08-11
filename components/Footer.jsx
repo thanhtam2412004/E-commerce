@@ -20,7 +20,14 @@ export default function Footer() {
             <p className="about-txt">Matcha nguyên chất từ Mộc Châu, chế tác thủ công cho từng khoảnh khắc chăm sóc bản thân.</p>
             <div className="social-row">
               <a href="#">f</a>
-              <a href="#">◎</a>
+              <a
+                href="https://www.instagram.com/grenalert?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram Green Atelier"
+              >
+                ◎
+              </a>
               <a href="#">♪</a>
             </div>
           </div>
