@@ -1,0 +1,49 @@
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\DELL\package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * C:\Users\DELL\Documents\GitHub\E-commerce\package-lock.json
+
+⚠ Attempted to load @next/swc-win32-x64-msvc, but an error occurred: \\?\C:\Users\DELL\Documents\GitHub\E-commerce\node_modules\@next\swc-win32-x64-msvc\next-swc.win32-x64-msvc.node is not a valid Win32 application.
+\\?\C:\Users\DELL\Documents\GitHub\E-commerce\node_modules\@next\swc-win32-x64-msvc\next-swc.win32-x64-msvc.node
+connect EACCES 173.194.174.95:443
+
+Retrying 1/3...
+connect EACCES 173.194.174.95:443
+
+Retrying 1/3...
+connect EACCES 173.194.174.95:443
+
+Retrying 2/3...
+connect EACCES 173.194.174.95:443
+
+Retrying 2/3...
+connect EACCES 173.194.174.95:443
+
+Retrying 3/3...
+connect EACCES 173.194.174.95:443
+
+Retrying 3/3...
+Error: connect EACCES 173.194.174.95:443
+    at <unknown> (Error: connect EACCES 173.194.174.95:443) {
+  errno: -4092,
+  code: 'EACCES',
+  syscall: 'connect',
+  address: '173.194.174.95',
+  port: 443
+}
+⨯ Failed to download `Fraunces` from Google Fonts. Using fallback font instead.
+
+Failed to fetch `Fraunces` from Google Fonts.}
+Error: connect EACCES 173.194.174.95:443
+    at <unknown> (Error: connect EACCES 173.194.174.95:443) {
+  errno: -4092,
+  code: 'EACCES',
+  syscall: 'connect',
+  address: '173.194.174.95',
+  port: 443
+}
+⨯ Failed to download `Manrope` from Google Fonts. Using fallback font instead.
+
+Failed to fetch `Manrope` from Google Fonts.}
