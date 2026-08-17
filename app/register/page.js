@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -133,15 +134,14 @@ export default function RegisterPage() {
               </div>
             </div>
             <div className="auth-art-side">
-              <div className="txt">
-                <svg fill="none" height="60" viewBox="0 0 40 40" width="60" style={{ margin: '0 auto' }}>
-                  <circle cx="20" cy="20" r="18" stroke="#8FAE6C" strokeWidth="2"></circle>
-                  <circle cx="20" cy="20" r="11" stroke="#D9AE6C" strokeWidth="2"></circle>
-                  <circle cx="20" cy="20" fill="#fff" r="4"></circle>
-                </svg>
-                <h2>Green Atelier</h2>
-                <p>Nơi giao thoa giữa thiên nhiên nguyên bản và phong cách sống hiện đại.</p>
-              </div>
+              <Image
+                src="/logo.png"
+                alt="Green Atelier"
+                width={560}
+                height={373}
+                className="auth-brand-logo"
+                priority
+              />
             </div>
           </div>
         </section>
