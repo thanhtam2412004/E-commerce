@@ -146,6 +146,7 @@ section.inner{padding:56px 0 90px;}
 .auth-art-side .txt{position:relative;z-index:2;color:#fff;text-align:center;max-width:340px;}
 .auth-art-side .txt h2{color:#fff;font-size:26px;margin:20px 0 10px;}
 .auth-art-side .txt p{color:var(--sage);font-size:14px;line-height:1.6;}
+.auth-brand-logo{width:min(78%,560px);height:auto;object-fit:contain;border-radius:24px;box-shadow:0 24px 60px rgba(10,24,12,.28);}
 @media (max-width:900px){.auth-shell{grid-template-columns:1fr;}.auth-art-side{display:none;}}
 
 /* ===== CART ===== */
