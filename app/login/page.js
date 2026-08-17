@@ -1,7 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -65,7 +64,7 @@ export default function LoginPage() {
       <Header />
       <main>
         <section className="page active">
-          <div className="auth-shell">
+          <div className="auth-shell auth-shell-single">
             <div className="auth-form-side">
               <div className="auth-form-box">
                 <h1>Chào mừng trở lại</h1>
@@ -111,16 +110,6 @@ export default function LoginPage() {
                   </p>
                 </form>
               </div>
-            </div>
-            <div className="auth-art-side">
-              <Image
-                src="/logo.png"
-                alt="Green Atelier"
-                width={560}
-                height={373}
-                className="auth-brand-logo"
-                priority
-              />
             </div>
           </div>
         </section>
