@@ -59,13 +59,18 @@ export default function Header() {
           <Link href="/contact" className={isActive('/contact')}>Liên hệ</Link>
         </nav>
         <div className="nav-actions">
-          <div className="search-box">
+          <form className="search-box header-search" action="/shop" method="get" role="search">
             <svg fill="none" height="15" stroke="#5b6b57" strokeWidth="2" viewBox="0 0 24 24" width="15">
               <circle cx="11" cy="11" r="7"></circle>
               <line x1="21" x2="16.65" y1="21" y2="16.65"></line>
             </svg>
-            Tìm sản phẩm...
-          </div>
+            <input
+              type="search"
+              name="q"
+              placeholder="Tìm sản phẩm..."
+              aria-label="Tìm kiếm sản phẩm"
+            />
+          </form>
           <Link
             href={customer ? '/account' : '/login'}
             aria-label={customer ? `Tài khoản của ${customer.name}` : 'Đăng nhập khách hàng'}
