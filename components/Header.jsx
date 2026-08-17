@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useSyncExternalStore } from 'react';
 import Image from 'next/image';
 import useCartStore from '@/store/cartStore';
 
@@ -10,11 +10,31 @@ export default function Header() {
   const isActive = (path) => (pathname === path ? 'active' : '');
 
   // Tránh hydration mismatch: chỉ render badge sau khi mount client
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
+  const [customer, setCustomer] = useState(null);
   const items = useCartStore((s) => s.items);
   const totalQty = items.reduce((sum, i) => sum + i.qty, 0);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    let active = true;
+    async function loadCustomer() {
+      try {
+        const response = await fetch('/api/auth/me', { cache: 'no-store' });
+        if (!response.ok) return;
+        const data = await response.json();
+        if (active && data.user?.role === 'customer') setCustomer(data.user);
+      } catch {
+        // Header vẫn hoạt động bình thường khi chưa đăng nhập hoặc API tạm lỗi.
+      }
+    }
+
+    loadCustomer();
+    return () => { active = false; };
+  }, [pathname]);
 
   return (
     <header>
@@ -46,11 +66,16 @@ export default function Header() {
             </svg>
             Tìm sản phẩm...
           </div>
-          <Link href="/login" aria-label="Tài khoản" className="icon-btn">
+          <Link
+            href={customer ? '/account' : '/login'}
+            aria-label={customer ? `Tài khoản của ${customer.name}` : 'Đăng nhập khách hàng'}
+            className={`account-link ${isActive(customer ? '/account' : '/login')}`}
+          >
             <svg fill="none" height="19" stroke="#26402A" strokeWidth="1.8" viewBox="0 0 24 24" width="19">
               <circle cx="12" cy="8" r="4"></circle>
               <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"></path>
             </svg>
+            <span>{customer ? customer.name.split(' ').at(-1) : 'Đăng nhập'}</span>
           </Link>
           <Link href="/cart" aria-label="Giỏ hàng" className="icon-btn">
             <svg fill="none" height="19" stroke="#26402A" strokeWidth="1.8" viewBox="0 0 24 24" width="19">
