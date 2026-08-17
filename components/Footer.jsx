@@ -37,6 +37,7 @@ export default function Footer() {
               <li><Link href="/shop">Tất cả sản phẩm</Link></li>
               <li><Link href="/shop?cat=Focus">Focus</Link></li>
               <li><Link href="/shop?cat=Energy">Energy</Link></li>
+              <li><Link href="/shop?cat=Calm">Calm</Link></li>
               <li><Link href="/shop?cat=Beauty">Beauty</Link></li>
             </ul>
           </div>
