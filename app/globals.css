@@ -238,7 +238,7 @@ section.inner{padding:56px 0 90px;}
 .result-panel h3{color:#fff;font-size:22px;margin-bottom:6px;}
 .result-panel p{color:var(--sage);font-size:14px;margin-bottom:22px;}
 .result-card{background:#fff;border-radius:16px;padding:16px;display:flex;gap:16px;align-items:center;color:var(--forest-2);}
-.result-card .thumb{width:64px;height:64px;border-radius:12px;background:linear-gradient(150deg,#DCE6C8,#B9C9A6);flex-shrink:0;}
+.result-card .thumb{width:64px;height:64px;border-radius:12px;background:#eef1e7;object-fit:cover;flex-shrink:0;}
 .result-card h4{font-size:15.5px;margin-bottom:4px;}
 
 /* ===== FOOTER ===== */
