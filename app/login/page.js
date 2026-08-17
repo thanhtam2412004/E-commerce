@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
@@ -10,6 +10,20 @@ export default function LoginPage() {
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+
+    fetch('/api/auth/me', { cache: 'no-store' })
+      .then((res) => res.ok ? res.json() : null)
+      .then((data) => {
+        if (!active || !data?.user) return;
+        router.replace(data.user.role === 'admin' ? '/admin/dashboard' : '/account');
+      })
+      .catch(() => {});
+
+    return () => { active = false; };
+  }, [router]);
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -85,6 +99,7 @@ export default function LoginPage() {
                       value={form.password}
                       onChange={handleChange}
                       autoComplete="current-password"
+                      minLength={6}
                     />
                   </div>
                   <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
