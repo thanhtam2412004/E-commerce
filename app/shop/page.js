@@ -50,6 +50,14 @@ export default function ShopPage() {
   const [loadError, setLoadError]   = useState('');
   const latestRequest               = useRef(0);
 
+  // Nhận từ khóa từ ô tìm kiếm trên header: /shop?q=matcha
+  useEffect(() => {
+    const initialQuery = new URLSearchParams(window.location.search).get('q')?.trim() || '';
+    if (!initialQuery) return;
+    const timer = setTimeout(() => setInputQ(initialQuery), 0);
+    return () => clearTimeout(timer);
+  }, []);
+
   // ── Debounce search ───────────────────────────────────────────────────────
   useEffect(() => {
     const t = setTimeout(() => {
